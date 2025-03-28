@@ -2,12 +2,11 @@ package smartrecycleradapter.feature
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnSingleItemSelectListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 
 
@@ -40,6 +39,6 @@ class SingleExpandableItemActivity : BaseSampleActivity() {
             .add(singleItemSelectViewModel.observe(this) {
                 showToast("onSelect ${it.position}")
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 }

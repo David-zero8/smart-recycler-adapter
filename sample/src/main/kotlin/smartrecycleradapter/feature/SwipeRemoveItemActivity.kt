@@ -7,14 +7,13 @@ import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.extension.SmartViewHolderBinder
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.swipe.BasicSwipeEventBinder
 import smartadapter.viewevent.swipe.SwipeFlags
-import smartrecycleradapter.R
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 
@@ -44,7 +43,7 @@ class SwipeRemoveItemActivity : BaseSampleActivity() {
                 // Remove item from SmartRecyclerAdapter data set
                 smartRecyclerAdapter.removeItem(it.viewHolder.adapterPosition)
             })
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     class SwipeRemoveItemBinder(

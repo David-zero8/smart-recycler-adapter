@@ -8,15 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
-import kotlinx.android.synthetic.main.activity_filter_item.searchView
-import kotlinx.android.synthetic.main.activity_filter_item.toolbarProgressBar
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
+import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityFilterItemBinding
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.diffutil.DiffUtilExtension
 import smartadapter.filter.FilterExtension
 import smartadapter.get
 import smartadapter.viewevent.listener.OnClickEventListener
-import smartrecycleradapter.R
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SmallHeaderViewHolder
@@ -28,8 +26,8 @@ import kotlin.random.Random
  */
 
 class SimpleFilterActivity : BaseSampleActivity() {
+    lateinit var bindingFilter: ActivityFilterItemBinding
 
-    override val contentView: Int = R.layout.activity_filter_item
     lateinit var smartAdapter: SmartRecyclerAdapter
 
     private val predicate = object : DiffUtilExtension.DiffPredicate<Any> {
@@ -44,6 +42,10 @@ class SimpleFilterActivity : BaseSampleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bindingFilter = ActivityFilterItemBinding.inflate(layoutInflater)
+        setContentView(bindingFilter.root)
+
+        setSupportActionBar(bindingFilter.toolbar)
 
         supportActionBar?.title = "Simple Filter"
 
@@ -64,13 +66,13 @@ class SimpleFilterActivity : BaseSampleActivity() {
                         }
                     }
                 ) {
-                    toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
+                    bindingFilter.toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
                 }
             )
-            .into(recyclerView)
+            .into(bindingFilter.recyclerView)
 
         // Set search view filter
-        searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        bindingFilter.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filter(query)
                 return true
@@ -94,7 +96,7 @@ class SimpleFilterActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.refresh -> refresh()
         }

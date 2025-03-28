@@ -5,7 +5,7 @@ package smartadapter.internal.utils
  * Copyright (c) All rights reserved.
  */
 
-import io.github.manneohlund.smartrecycleradapter.R
+import io.github.zero8.smartrecycleradapter.R
 
 /**
  * Checks if auto view events are of the predefined types provided by the SmartRecyclerAdapter library.

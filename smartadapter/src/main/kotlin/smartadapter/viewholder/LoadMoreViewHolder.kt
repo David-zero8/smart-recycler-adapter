@@ -13,7 +13,7 @@ import android.widget.ProgressBar
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatButton
 
-import io.github.manneohlund.smartrecycleradapter.R
+import io.github.zero8.smartrecycleradapter.R
 
 /**
  * Default implementation of load more view holder.

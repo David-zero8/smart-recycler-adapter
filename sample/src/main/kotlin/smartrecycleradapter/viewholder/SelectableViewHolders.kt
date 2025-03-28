@@ -5,8 +5,8 @@ import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 
 /*

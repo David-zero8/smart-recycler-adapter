@@ -5,25 +5,24 @@ package smartrecycleradapter.viewholder
  * Copyright (c) All rights reserved.
  */
 
+import android.view.LayoutInflater
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.nested_recycler_view.view.more
-import kotlinx.android.synthetic.main.nested_recycler_view.view.nestedRecyclerView
-import kotlinx.android.synthetic.main.nested_recycler_view.view.title
+import io.github.zero8.smartrecycleradapter.sample.databinding.NestedRecyclerViewBinding
 import smartadapter.nestedadapter.SmartNestedRecyclerViewHolder
-import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
+import smartadapter.viewholder.BindingSmartViewHolderr
 import smartrecycleradapter.models.MovieCategory
 
 open class NestedRecyclerViewHolder(parentView: ViewGroup) :
-    SmartViewHolder<MovieCategory>(parentView, R.layout.nested_recycler_view),
-    SmartNestedRecyclerViewHolder {
+    BindingSmartViewHolderr<MovieCategory, NestedRecyclerViewBinding>(
+        NestedRecyclerViewBinding.inflate(LayoutInflater.from(parentView.context), parentView, false)
+    ), SmartNestedRecyclerViewHolder {
 
-    override val recyclerView: RecyclerView = itemView.nestedRecyclerView
+    override val recyclerView: RecyclerView = binding.nestedRecyclerView
 
     override fun bind(item: MovieCategory) {
-        itemView.title.text = item.title
+        binding.title.text = item.title
     }
 }
 
@@ -42,7 +41,6 @@ class SciFiMoviesViewHolder(parentView: ViewGroup) : NestedRecyclerViewHolder(pa
 class RecentlyPlayedMoviesViewHolder(parentView: ViewGroup) : NestedRecyclerViewHolder(parentView) {
 
     init {
-        itemView.more.visibility = GONE
-        //itemView.nestedRecyclerView.layoutManager = GridAutoLayoutManager(recyclerView.context, 60)
+        binding.more.visibility = GONE
     }
 }

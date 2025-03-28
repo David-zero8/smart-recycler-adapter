@@ -7,8 +7,9 @@ package smartrecycleradapter.viewholder
 
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
+
 
 class SampleFabViewHolder(parentView: ViewGroup) :
     SmartViewHolder<SampleFabViewHolder.SimpleFabItem>(parentView, R.layout.efab) {

@@ -9,12 +9,11 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnMultiItemSelectListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableItemViewHolder
 
@@ -43,7 +42,7 @@ class MultiSelectItemsActivity : BaseSampleActivity() {
             .add(multiItemSelectViewModel.observe(this) {
                 handleCheckEvent(it)
             })
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,7 +51,7 @@ class MultiSelectItemsActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.delete -> {
                 multiItemSelectViewModel.viewEventListener.removeSelections()

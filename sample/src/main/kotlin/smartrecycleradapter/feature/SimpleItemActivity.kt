@@ -1,7 +1,6 @@
 package smartrecycleradapter.feature
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 
@@ -22,6 +21,6 @@ class SimpleItemActivity : BaseSampleActivity() {
         SmartRecyclerAdapter
             .items(items)
             .map(Integer::class, SimpleItemViewHolder::class)
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 }

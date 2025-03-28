@@ -8,10 +8,10 @@ package smartrecycleradapter.viewholder
 import android.view.ViewGroup
 import android.widget.TextView
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
+import io.github.zero8.smartrecycleradapter.sample.R
 
 open class SmallHeaderViewHolder(parentView: ViewGroup) :
-    SmartViewHolder<String>(parentView, R.layout.header) {
+    SmartViewHolder<String>(parentView = parentView, layout = R.layout.header) {
 
     private val summary: TextView = itemView as TextView
 
@@ -28,7 +28,7 @@ open class SmallHeaderViewHolder(parentView: ViewGroup) :
 }
 
 open class HeaderViewHolder(parentView: ViewGroup) :
-    SmartViewHolder<String>(parentView, R.layout.header) {
+    SmartViewHolder<String>(parentView = parentView, layout = R.layout.header) {
 
     private val summary: TextView = itemView as TextView
 

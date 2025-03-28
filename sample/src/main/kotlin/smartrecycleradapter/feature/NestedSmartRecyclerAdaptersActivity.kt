@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.BuildConfig
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.nestedadapter.SmartNestedAdapterBinder
 import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnLongClickEventListener
-import smartrecycleradapter.BuildConfig
-import smartrecycleradapter.R
 import smartrecycleradapter.extension.GridAutoLayoutManager
 import smartrecycleradapter.models.CopyrightModel
 import smartrecycleradapter.models.MovieCategory
@@ -141,7 +140,7 @@ class NestedSmartRecyclerAdaptersActivity : BaseSampleActivity() {
             .add(OnClickEventListener(NestedRecyclerViewHolder::class, R.id.more) {
                 showToast("More clicked at ${it.position}")
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 
     private fun getMovieTitle(

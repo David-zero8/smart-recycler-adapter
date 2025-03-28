@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.activity_movie_category_details.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityMovieCategoryDetailsBinding
 import smartadapter.Position
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartadapter.SmartRecyclerAdapter
@@ -28,6 +28,8 @@ enum class MovieType(val title: String) {
 
 class MovieCategoryDetailsActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMovieCategoryDetailsBinding
+
     private val movieData: MovieData by lazy {
         AssetsUtils.loadStyleFromAssets<MovieData>(this, "main-movie-data.json")
     }
@@ -37,7 +39,8 @@ class MovieCategoryDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_category_details)
+        binding = ActivityMovieCategoryDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         intent?.getIntExtra("MovieType", MovieType.ANIMATED.ordinal)?.let {
             movieType = MovieType.values()[it]
@@ -77,7 +80,7 @@ class MovieCategoryDetailsActivity : AppCompatActivity() {
                     .add(OnClickEventListener(ThumbViewHolder::class) {
                         showToast("Movie ${it.position}")
                     })
-                    .into(recyclerView)
+                    .into<SmartRecyclerAdapter>(binding.recyclerView)
             }
             MovieType.ACTION, MovieType.ADVENTURE, MovieType.ANIMATED, MovieType.SCI_FI -> {
                 SmartEndlessScrollRecyclerAdapter.items(adapterItems)
@@ -104,7 +107,7 @@ class MovieCategoryDetailsActivity : AppCompatActivity() {
                     .add(OnClickEventListener(ThumbViewHolder::class) {
                         showToast("Movie ${it.position}")
                     })
-                    .into<SmartEndlessScrollRecyclerAdapter>(recyclerView)
+                    .into<SmartEndlessScrollRecyclerAdapter>(binding.recyclerView)
             }
         }
     }

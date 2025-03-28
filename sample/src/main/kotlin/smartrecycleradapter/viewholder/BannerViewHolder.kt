@@ -12,8 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 import smartrecycleradapter.models.MovieCategory
 import smartrecycleradapter.utils.displayWidth
 

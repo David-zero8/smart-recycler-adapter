@@ -7,7 +7,7 @@ package smartadapter
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import io.github.manneohlund.smartrecycleradapter.R
+import io.github.zero8.smartrecycleradapter.R
 import smartadapter.listener.OnLoadMoreListener
 import smartadapter.viewholder.LoadMoreViewHolder
 import smartadapter.viewholder.SmartViewHolder

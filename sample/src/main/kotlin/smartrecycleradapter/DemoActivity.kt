@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.github.zero8.smartrecycleradapter.sample.BuildConfig
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.Position
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartadapter.SmartRecyclerAdapter

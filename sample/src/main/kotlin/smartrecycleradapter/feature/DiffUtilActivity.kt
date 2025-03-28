@@ -3,12 +3,11 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.diffutil.DiffUtilExtension
 import smartadapter.diffutil.SimpleDiffUtilExtension
 import smartadapter.diffutil.extension.diffSwapList
-import smartrecycleradapter.R
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import kotlin.random.Random.Default.nextInt
 
@@ -36,14 +35,13 @@ class DiffUtilActivity : BaseSampleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         supportActionBar?.title = "Diff Util Sample"
 
         smartRecyclerAdapter = SmartRecyclerAdapter
             .items(items)
             .map(Integer::class, SimpleItemViewHolder::class)
             .add(SimpleDiffUtilExtension(predicate))
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -53,14 +51,14 @@ class DiffUtilActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.scroll_top -> {
-                recyclerView.smoothScrollToPosition(0)
+                binding.recyclerView.smoothScrollToPosition(0)
             }
             R.id.sort -> {
                 smartRecyclerAdapter.diffSwapList(items)
-                recyclerView.scrollToPosition(0)
+                binding.recyclerView.scrollToPosition(0)
             }
             R.id.shuffle -> {
                 smartRecyclerAdapter.diffSwapList(

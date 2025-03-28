@@ -11,7 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnCustomViewEventListener
@@ -19,7 +19,6 @@ import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewholder.CustomViewEventListenerHolder
 import smartadapter.viewholder.SmartAdapterHolder
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 
 @SuppressLint("ClickableViewAccessibility")
@@ -45,7 +44,7 @@ class CustomViewEventActivity : BaseSampleActivity() {
             .add(OnCustomViewEventListener { event ->
                 showToast(event)
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 
     fun showToast(event: ViewEvent) {

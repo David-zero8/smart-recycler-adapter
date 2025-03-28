@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="smartrecycleradapter">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,84 +11,110 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".feature.SimpleItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SimpleItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.SimpleItemOnClickOnLongClickActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SimpleItemOnClickOnLongClickActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.CustomViewEventActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.CustomViewEventActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultipleViewTypesResolverActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultipleViewTypesResolverActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.DragAndDropItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.DragAndDropItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.DragAndDropHandleItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.DragAndDropHandleItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.SwipeRemoveItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SwipeRemoveItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultipleEventsAndExtensionsActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultipleEventsAndExtensionsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.GridActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.GridActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.SimpleFilterActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SimpleFilterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.SimpleFilterDiffSwapActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SimpleFilterDiffSwapActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.FilterGridActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.FilterGridActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultiSelectItemsActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultiSelectItemsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.SingleSelectRadioButtonItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SingleSelectRadioButtonItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultiSelectCheckBoxItemsActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultiSelectCheckBoxItemsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultiSelectSwitchItemsActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultiSelectSwitchItemsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.NestedSmartRecyclerAdaptersActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.NestedSmartRecyclerAdaptersActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.EndlessScrollActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.EndlessScrollActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.EndlessScrollLoadMoreButtonActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.EndlessScrollLoadMoreButtonActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.DiffUtilActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.DiffUtilActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultipleExpandableItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultipleExpandableItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.MultipleExpandableItemHeaderActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.MultipleExpandableItemHeaderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".feature.StickyHeaderActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.StickyHeaderActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".feature.SingleExpandableItemActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.feature.SingleExpandableItemActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MovieCategoryDetailsActivity"
+            android:exported="true"
+            android:name="smartrecycleradapter.MovieCategoryDetailsActivity"
             android:label="@string/title_activity_movie_category_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".DemoActivity">
+            android:name="smartrecycleradapter.DemoActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />

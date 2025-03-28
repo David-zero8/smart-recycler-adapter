@@ -2,7 +2,7 @@ package smartadapter.viewevent.listener
 
 import android.annotation.SuppressLint
 import androidx.annotation.IdRes
-import io.github.manneohlund.smartrecycleradapter.viewevent.R
+import io.github.zero8.smartrecycleradapter.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.SmartViewHolderType
 import smartadapter.ViewId

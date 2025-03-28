@@ -1,7 +1,6 @@
 package smartrecycleradapter.feature
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
 import smartadapter.viewevent.listener.OnClickEventListener
@@ -36,6 +35,6 @@ class DragAndDropItemActivity : BaseSampleActivity() {
                 supportActionBar?.subtitle =
                     "onItemMoved from ${event.viewHolder.adapterPosition} to ${event.targetViewHolder.adapterPosition}"
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 }

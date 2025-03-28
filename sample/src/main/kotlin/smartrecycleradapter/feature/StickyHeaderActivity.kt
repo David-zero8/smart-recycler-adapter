@@ -8,7 +8,6 @@ package smartrecycleradapter.feature
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.stickyheader.StickyHeaderItemDecorationExtension
 import smartrecycleradapter.feature.simpleitem.SimpleHeaderViewHolder
@@ -40,7 +39,7 @@ class StickyHeaderActivity : BaseSampleActivity() {
                     showToast("Header $itemPosition clicked")
                 }
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
 
         SimpleHeaderViewHolder.color = Color.DKGRAY
     }

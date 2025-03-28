@@ -7,14 +7,13 @@ package smartrecycleradapter.feature
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnMultiItemCheckListener
 import smartadapter.viewevent.listener.OnMultiItemSelectListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartrecycleradapter.R
 import smartrecycleradapter.models.CopyrightModel
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.CopyrightViewHolder
@@ -89,6 +88,6 @@ class MultipleViewTypesResolverActivity : BaseSampleActivity() {
                     else -> SimpleSelectableItemViewHolder::class
                 }
             }
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 }

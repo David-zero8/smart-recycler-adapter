@@ -3,7 +3,6 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
@@ -35,7 +34,7 @@ class GridActivity : BaseSampleActivity() {
         val gridAutoLayoutManager = GridAutoLayoutManager(this, 100)
         gridAutoLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Position): Int {
-                return if ((recyclerView.adapter as SmartRecyclerAdapter).getItem(position) is String) gridAutoLayoutManager.spanCount else 1
+                return if ((binding.recyclerView.adapter as SmartRecyclerAdapter).getItem(position) is String) gridAutoLayoutManager.spanCount else 1
             }
         }
 
@@ -71,7 +70,7 @@ class GridActivity : BaseSampleActivity() {
                         "onItemMoved from ${it.viewHolder.adapterPosition} to ${it.targetViewHolder.adapterPosition}"
                 }
             )
-            .into(recyclerView)
+            .into(binding.recyclerView)
 
         // Set adapter data
         smartAdapter.addItem("Coming soon")

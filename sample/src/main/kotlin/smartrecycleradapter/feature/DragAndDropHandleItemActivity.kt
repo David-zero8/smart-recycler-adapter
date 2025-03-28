@@ -5,14 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnLongClickEventListener
 import smartadapter.viewholder.DraggableViewHolder
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 
 /*
@@ -42,7 +41,7 @@ class DragAndDropHandleItemActivity : BaseSampleActivity() {
                 supportActionBar?.subtitle =
                     "onItemMoved from ${it.viewHolder.adapterPosition} to ${it.targetViewHolder.adapterPosition}"
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 
     class SimpleDragHandleItemViewHolder(parentView: ViewGroup) :

@@ -6,9 +6,8 @@ package smartrecycleradapter.feature
  */
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartEndlessScrollRecyclerAdapter
-import smartrecycleradapter.R
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.runDelayed
 import smartrecycleradapter.utils.showToast
@@ -36,7 +35,7 @@ class EndlessScrollActivity : BaseSampleActivity() {
                 }
             }
             .map(Integer::class, SimpleItemViewHolder::class)
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     private fun addMoreStuff() {

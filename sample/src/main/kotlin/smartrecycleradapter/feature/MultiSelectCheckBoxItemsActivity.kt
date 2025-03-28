@@ -9,13 +9,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnMultiItemCheckListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableCheckBoxViewHolder
 
@@ -48,7 +47,7 @@ class MultiSelectCheckBoxItemsActivity : BaseSampleActivity() {
             .add(OnClickEventListener {
                 showToast("onClick ${it.position}")
             })
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,7 +56,7 @@ class MultiSelectCheckBoxItemsActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.delete -> {
                 multiItemCheckViewModel.viewEventListener.removeSelections()

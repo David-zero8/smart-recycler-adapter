@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import kotlinx.android.synthetic.main.activity_filter_item.searchView
-import kotlinx.android.synthetic.main.activity_filter_item.toolbarProgressBar
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityFilterItemBinding
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.diffutil.DiffUtilExtension
@@ -15,7 +13,6 @@ import smartadapter.diffutil.extension.diffSwapList
 import smartadapter.filter.FilterExtension
 import smartadapter.get
 import smartadapter.viewevent.listener.OnClickEventListener
-import smartrecycleradapter.R
 import smartrecycleradapter.extension.GridAutoLayoutManager
 import smartrecycleradapter.models.MovieData
 import smartrecycleradapter.models.MovieModel
@@ -31,11 +28,13 @@ import smartrecycleradapter.viewholder.SmallThumbViewHolder
 
 class FilterGridActivity : BaseSampleActivity() {
 
+    lateinit var bindingFilter: ActivityFilterItemBinding
+
+
     private val movieData: MovieData by lazy {
         AssetsUtils.loadStyleFromAssets<MovieData>(this, "main-movie-data.json")
     }
 
-    override val contentView: Int = R.layout.activity_filter_item
     lateinit var smartAdapter: SmartRecyclerAdapter
 
     private val predicate = object : DiffUtilExtension.DiffPredicate<Any> {
@@ -50,13 +49,18 @@ class FilterGridActivity : BaseSampleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bindingFilter = ActivityFilterItemBinding.inflate(layoutInflater)
+        setContentView(bindingFilter.root)
 
+        setSupportActionBar(bindingFilter.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
         supportActionBar?.title = "Filter Grid"
 
         val gridAutoLayoutManager = GridAutoLayoutManager(this, 70).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Position): Int {
-                    return if ((recyclerView.adapter as SmartRecyclerAdapter).getItem(position) is String) spanCount else 1
+                    return if ((bindingFilter.recyclerView.adapter as SmartRecyclerAdapter).getItem(position) is String) spanCount else 1
                 }
             }
         }
@@ -83,17 +87,17 @@ class FilterGridActivity : BaseSampleActivity() {
                     },
                     targetFilterTypes = listOf(MovieModel::class),
                     loadingStateListener = {
-                        toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
+                        bindingFilter.toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
                     }
                 )
             )
             .add(SimpleDiffUtilExtension(predicate) {
-                toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
+                bindingFilter.toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
             })
-            .into(recyclerView)
+            .into(bindingFilter.recyclerView)
 
         // Set search view filter
-        searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        bindingFilter.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 filter(query)
                 return true
@@ -143,7 +147,7 @@ class FilterGridActivity : BaseSampleActivity() {
                 }
             } else {
                 diffExtension.cancelDiffSwapJob()
-                recyclerView.scrollToPosition(0)
+                bindingFilter.recyclerView.scrollToPosition(0)
                 supportActionBar?.subtitle = "${smartAdapter.itemCount} items filtered"
             }
         }

@@ -9,13 +9,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnSingleItemCheckListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartrecycleradapter.R
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableRadioButtonViewHolder
 
@@ -45,7 +44,7 @@ class SingleSelectRadioButtonItemActivity : BaseSampleActivity() {
             .add(OnClickEventListener {
                 showToast("onClick ${it.position}")
             })
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -54,7 +53,7 @@ class SingleSelectRadioButtonItemActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.delete -> {
                 singleItemCheckedViewModel.viewEventListener.removeSelections()

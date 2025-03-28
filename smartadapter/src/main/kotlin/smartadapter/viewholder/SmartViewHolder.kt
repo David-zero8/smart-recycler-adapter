@@ -9,8 +9,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.databinding.ViewDataBinding
 
 import androidx.recyclerview.widget.RecyclerView
+import smartadapter.SmartRecyclerAdapter
 
 /**
  * Extension of [RecyclerView.ViewHolder] containing data item binding method.
@@ -20,4 +22,14 @@ abstract class SmartViewHolder<T : Any>(view: View) : RecyclerView.ViewHolder(vi
     constructor(parentView: ViewGroup, @LayoutRes layout: Int) : this(
         LayoutInflater.from(parentView.context).inflate(layout, parentView, false)
     )
+}
+
+abstract class BindingSmartViewHolderr<T : Any, T2: ViewDataBinding> : SmartViewHolder<T>,
+    SmartAdapterHolder {
+    override var smartRecyclerAdapter: SmartRecyclerAdapter? = null
+    var binding: T2
+
+    constructor(parent: T2) : super(parent.root){
+        binding = parent
+    }
 }

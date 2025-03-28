@@ -13,14 +13,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnMultiItemSelectListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewholder.OnItemSelectedEventListener
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 
 class MultipleExpandableItemActivity : BaseSampleActivity() {
 
@@ -49,7 +48,7 @@ class MultipleExpandableItemActivity : BaseSampleActivity() {
                 supportActionBar?.subtitle =
                     "${multiItemSelectViewModel.viewEventListener.selectedItemsCount} / ${items.size} expanded"
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -60,7 +59,7 @@ class MultipleExpandableItemActivity : BaseSampleActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.expand_all -> multiItemSelectViewModel.viewEventListener.enableAll()
             R.id.collapse_all -> multiItemSelectViewModel.viewEventListener.disableAll()

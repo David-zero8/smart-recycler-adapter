@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'maven-publish'
 
 ext {
@@ -13,10 +13,14 @@ ext {
 
 apply from: '../../common-library-config.gradle'
 
+android {
+    namespace "io.github.zero8.smartrecycleradapter.viewevent"
+}
+
 dependencies {
     // Androidx
     implementation "androidx.appcompat:appcompat:$appcompat_version" // For runtime resolving R.attr.selectableItemBackground
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
+//    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_extensions_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewmodel_ktx_version"
 }
 

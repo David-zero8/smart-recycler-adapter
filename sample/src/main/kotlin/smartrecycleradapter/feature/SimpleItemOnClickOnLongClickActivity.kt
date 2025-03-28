@@ -3,7 +3,6 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartadapter.viewevent.listener.OnLongClickEventListener
@@ -39,7 +38,7 @@ class SimpleItemOnClickOnLongClickActivity : BaseSampleActivity() {
             .add(OnLongClickEventListener {
                 showToast("onItemLongClick ${it.position}")
             })
-            .into<SmartRecyclerAdapter>(recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
     }
 
     class SimpleEventListenerViewHolder(parentView: ViewGroup) : SimpleItemViewHolder(parentView),

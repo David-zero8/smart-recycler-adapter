@@ -8,7 +8,7 @@ package smartadapter.viewevent.listener
 import android.graphics.Color
 import android.widget.CompoundButton
 import androidx.annotation.IdRes
-import io.github.manneohlund.smartrecycleradapter.viewevent.R
+import io.github.zero8.smartrecycleradapter.R
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.SmartViewHolderType
@@ -319,7 +319,7 @@ open class OnMultiItemSelectListener(
             if (isSelected(viewHolder.adapterPosition)) {
                 viewHolder.itemView.setBackgroundColor(Color.RED)
             } else {
-                viewHolder.itemView.setBackgroundAttribute(R.attr.selectableItemBackground)
+                viewHolder.itemView.setBackgroundAttribute(android.R.attr.selectableItemBackground)
             }
         }
     }

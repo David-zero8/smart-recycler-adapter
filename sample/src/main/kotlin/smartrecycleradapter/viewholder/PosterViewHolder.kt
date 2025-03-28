@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewholder.CustomViewEventListenerHolder
 import smartadapter.viewholder.SmartAdapterHolder
 import smartadapter.viewholder.SmartViewHolder
-import smartrecycleradapter.R
 import smartrecycleradapter.models.MovieCategory
 import smartrecycleradapter.utils.displayHeight
 import smartrecycleradapter.utils.displayWidth

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_simple_item.recyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
 import smartadapter.viewevent.listener.OnClickEventListener
@@ -45,7 +44,7 @@ class MultipleEventsAndExtensionsActivity : BaseSampleActivity() {
             .add(AutoRemoveItemSwipeEventBinder(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) { event ->
                 showToast(event.viewHolder, event.direction)
             })
-            .into(recyclerView)
+            .into(binding.recyclerView)
     }
 
     val showToast = { viewHolder: RecyclerView.ViewHolder, direction: Int ->
