@@ -1,67 +1,67 @@
-task sourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
-
-task javadoc(type: Javadoc) {
-    failOnError = false
-    source = android.sourceSets.main.java.srcDirs
-    classpath += files(android.bootClasspath)
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-
-                artifact sourcesJar
-                artifact javadocJar
-
-                groupId = PUBLISHED_GROUP_ID
-                artifactId = ARTIFACT_ID
-                version = LIBRARY_VERSION
-
-                pom {
-                    name = LIBRARY_NAME
-                    description = LIBRARY_DESCRIPTION
-                    url = SITE_URL
-
-                    licenses {
-                        license {
-                            name = LICENSE_NAME
-                            url = LICENSE_URL
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = DEVELOPER_ID
-                            name = DEVELOPER_NAME
-                            email = DEVELOPER_EMAIL
-                        }
-                    }
-                    scm {
-                        connection = GIT_URL
-                        developerConnection = GIT_URL
-                        url = SITE_URL
-                    }
-                }
-            }
-        }
-
-        repositories {
-            maven {
-                name = "LocalRepo"
-                url = uri("${project.rootDir}/repo")
-            }
-        }
-    }
-}
+//task sourcesJar(type: Jar) {
+//    archiveClassifier.set('sources')
+//    from android.sourceSets.main.java.srcDirs
+//}
+//
+//task javadoc(type: Javadoc) {
+//    failOnError = false
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += files(android.bootClasspath)
+//}
+//
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    archiveClassifier.set('javadoc')
+//    from javadoc.destinationDir
+//}
+//
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+//
+//                artifact sourcesJar
+//                artifact javadocJar
+//
+//                groupId = PUBLISHED_GROUP_ID
+//                artifactId = ARTIFACT_ID
+//                version = LIBRARY_VERSION
+//
+//                pom {
+//                    name = LIBRARY_NAME
+//                    description = LIBRARY_DESCRIPTION
+//                    url = SITE_URL
+//
+//                    licenses {
+//                        license {
+//                            name = LICENSE_NAME
+//                            url = LICENSE_URL
+//                        }
+//                    }
+//                    developers {
+//                        developer {
+//                            id = DEVELOPER_ID
+//                            name = DEVELOPER_NAME
+//                            email = DEVELOPER_EMAIL
+//                        }
+//                    }
+//                    scm {
+//                        connection = GIT_URL
+//                        developerConnection = GIT_URL
+//                        url = SITE_URL
+//                    }
+//                }
+//            }
+//        }
+//
+//        repositories {
+//            maven {
+//                name = "LocalRepo"
+//                url = uri("${project.rootDir}/repo")
+//            }
+//        }
+//    }
+//}
 
 //
 //group = PUBLISHED_GROUP_ID
