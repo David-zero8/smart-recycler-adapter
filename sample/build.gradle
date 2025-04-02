@@ -25,14 +25,10 @@ android {
 
     signingConfigs {
         release {
-            try {
-                storeFile file(properties['storeFile'])
-                storePassword properties['storePassword']
-                keyAlias properties['keyAlias']
-                keyPassword properties['keyPassword']
-            } catch (e) {
-                // Silent fail
-            }
+            storeFile null
+            storePassword null
+            keyAlias null
+            keyPassword null
         }
     }
 
@@ -41,7 +37,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig null
             resValue "string", "app_name", "SmartAdapter"
         }
         debug {
