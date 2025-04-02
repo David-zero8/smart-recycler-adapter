@@ -44,14 +44,18 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-
-        maven {
-            url "https://dl.bintray.com/manneohlund/maven"
-        }
         mavenLocal()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+tasks.register('assembleAllModules') {
+    dependsOn(':smartadapter:assembleRelease',
+            ':extensions:viewevent:assembleRelease',
+            ':extensions:nestedadapter:assembleRelease',
+            ':extensions:stickyheader:assembleRelease',
+            ':extensions:filter:assembleRelease')
 }
