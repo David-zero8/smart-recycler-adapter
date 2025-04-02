@@ -50,7 +50,7 @@ open class BasicDragAndDropBinder(
                     ViewEvent.OnItemMoved(
                         smartRecyclerAdapter,
                         viewHolder as SmartViewHolder<*>,
-                        viewHolder.adapterPosition,
+                        viewHolder.bindingAdapterPosition,
                         viewHolder.itemView,
                         target as SmartViewHolder<*>
                     )

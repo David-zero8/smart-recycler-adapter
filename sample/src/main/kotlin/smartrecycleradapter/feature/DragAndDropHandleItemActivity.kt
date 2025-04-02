@@ -39,7 +39,7 @@ class DragAndDropHandleItemActivity : BaseSampleActivity() {
             })
             .add(AutoDragAndDropBinder(ItemTouchHelper.UP or ItemTouchHelper.DOWN) {
                 supportActionBar?.subtitle =
-                    "onItemMoved from ${it.viewHolder.adapterPosition} to ${it.targetViewHolder.adapterPosition}"
+                    "onItemMoved from ${it.viewHolder.bindingAdapterPosition} to ${it.targetViewHolder.bindingAdapterPosition}"
             })
             .into<SmartRecyclerAdapter>(binding.recyclerView)
     }

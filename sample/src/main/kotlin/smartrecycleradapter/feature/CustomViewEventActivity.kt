@@ -69,7 +69,7 @@ class CustomViewEventActivity : BaseSampleActivity() {
                             ViewEvent.OnTouchEvent(
                                 smartRecyclerAdapter!!,
                                 this,
-                                adapterPosition,
+                                bindingAdapterPosition,
                                 view,
                                 event
                             )
@@ -84,7 +84,7 @@ class CustomViewEventActivity : BaseSampleActivity() {
                     ViewEvent.OnClick(
                         smartRecyclerAdapter!!,
                         this,
-                        adapterPosition,
+                        bindingAdapterPosition,
                         view
                     )
                 )
@@ -95,7 +95,7 @@ class CustomViewEventActivity : BaseSampleActivity() {
                     CustomEvent(
                         smartRecyclerAdapter!!,
                         this,
-                        adapterPosition,
+                        bindingAdapterPosition,
                         view
                     )
                 )

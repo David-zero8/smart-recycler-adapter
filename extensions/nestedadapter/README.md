@@ -157,7 +157,7 @@ override fun onBindViewHolder(
     adapter: SmartRecyclerAdapter,
     viewHolder: SmartViewHolder<Any>
 ) {
-    val items = (adapter.getItem(viewHolder.adapterPosition) as SmartNestedItem<*>).items
+    val items = (adapter.getItem(viewHolder.bindingAdapterPosition) as SmartNestedItem<*>).items
     (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.adapter =
         nestedAdapters[viewHolder]!!.also {
             it.setItems(items as MutableList<*>)

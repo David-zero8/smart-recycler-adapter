@@ -37,7 +37,7 @@ open class OnTouchEventListener(
                     val event = ViewEvent.OnTouchEvent(
                         adapter,
                         viewHolder,
-                        viewHolder.adapterPosition,
+                        viewHolder.bindingAdapterPosition,
                         view,
                         motionEvent
                     )

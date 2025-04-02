@@ -34,7 +34,7 @@ open class OnLongClickEventListener(
                     val event = ViewEvent.OnLongClick(
                         adapter,
                         viewHolder,
-                        viewHolder.adapterPosition,
+                        viewHolder.bindingAdapterPosition,
                         view
                     )
                     if (viewHolder is OnItemLongClickEventListener) {

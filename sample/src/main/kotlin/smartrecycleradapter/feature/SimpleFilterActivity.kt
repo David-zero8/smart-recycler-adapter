@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
 import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityFilterItemBinding
 import smartadapter.SmartRecyclerAdapter
-import smartadapter.diffutil.DiffUtilExtension
 import smartadapter.filter.FilterExtension
 import smartadapter.get
+import smartadapter.internal.extension.submitListWithLoading
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
@@ -30,13 +31,19 @@ class SimpleFilterActivity : BaseSampleActivity() {
 
     lateinit var smartAdapter: SmartRecyclerAdapter
 
-    private val predicate = object : DiffUtilExtension.DiffPredicate<Any> {
+    private val predicate = object : DiffUtil.ItemCallback<Any>() {
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return oldItem == newItem
+            return when(oldItem) {
+                is Int -> oldItem == newItem
+                else -> false
+            }
         }
 
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return oldItem == newItem
+            return when(oldItem) {
+                is Int -> oldItem == newItem
+                else -> false
+            }
         }
     }
 
@@ -49,9 +56,10 @@ class SimpleFilterActivity : BaseSampleActivity() {
 
         supportActionBar?.title = "Simple Filter"
 
-        val items = (0..100000).map { Random.nextInt(100, 10000) }.toMutableList()
+        val items = (0..300).map { Random.nextInt(100, 10000) }.toMutableList()
 
         smartAdapter = SmartRecyclerAdapter.items(items)
+            .setDiffCallback(predicate)
             .map(String::class, SmallHeaderViewHolder::class)
             .map(Int::class, SimpleFilterItemViewHolder::class)
             .add(OnClickEventListener {
@@ -71,6 +79,8 @@ class SimpleFilterActivity : BaseSampleActivity() {
             )
             .into(bindingFilter.recyclerView)
 
+        setOriginalItems(smartAdapter.getItems())
+
         // Set search view filter
         bindingFilter.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -87,8 +97,23 @@ class SimpleFilterActivity : BaseSampleActivity() {
 
     fun filter(query: String?) {
         val filterExtension: FilterExtension = smartAdapter.get()
+        filterExtension.filter(lifecycleScope, query) {
+            if (it.isSuccess) {
+                // 호출 부분
+                smartAdapter.submitListWithLoading(
+                    lifecycleScope,
+                    newList = it.getOrDefault(listOf()),
+                    onLoadingStateChanged = { isLoading ->
+                        bindingFilter.toolbarProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                    },
+                    onListUpdated = {
 
-        filterExtension.filter(lifecycleScope, query, autoSetNewItems = true)
+                    }
+                )
+            } else {
+                bindingFilter.recyclerView.scrollToPosition(0)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,8 +129,15 @@ class SimpleFilterActivity : BaseSampleActivity() {
     }
 
     private fun refresh() {
-        val items = (0..10000).map { Random.nextInt(100, 10000) }.toMutableList()
-        smartAdapter.setItems(items)
+        val items = (0..300).map { Random.nextInt(100, 10000) }.toMutableList()
+        smartAdapter.setItems(items) {
+            setOriginalItems(smartAdapter.getItems())
+        }
+    }
+
+    fun setOriginalItems(items: List<Any>) {
+        val filterExtension: FilterExtension = smartAdapter.get()
+        filterExtension.setOriginalItems(items)
     }
 }
 

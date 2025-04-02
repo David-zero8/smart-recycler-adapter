@@ -1,6 +1,7 @@
 package smartadapter
 
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.R
 import smartadapter.listener.OnLoadMoreListener
 
@@ -13,7 +14,7 @@ class SmartEndlessScrollAdapterBuilder : SmartAdapterBuilder() {
     private var onLoadMoreListener: OnLoadMoreListener? = null
 
     override fun getSmartRecyclerAdapter(): SmartRecyclerAdapter {
-        return SmartEndlessScrollRecyclerAdapter(items).also {
+        return SmartEndlessScrollRecyclerAdapter(items= items).also {
             it.isEndlessScrollEnabled = isEndlessScrollEnabled
             it.autoLoadMoreEnabled = autoLoadMoreEnabled
             it.loadMoreLayoutResource = loadMoreLayoutResource

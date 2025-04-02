@@ -14,27 +14,28 @@ import smartrecycleradapter.utils.showToast
  */
 
 class DragAndDropItemActivity : BaseSampleActivity() {
-
+    private lateinit var smartRecyclerAdapter: SmartRecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportActionBar?.title = "Drag & Drop"
 
-        val items = (0..50).toMutableList()
+        val items = (0..20).toMutableList()
 
-        SmartRecyclerAdapter
+        smartRecyclerAdapter = SmartRecyclerAdapter
             .items(items)
             .map(Integer::class, SimpleItemViewHolder::class)
             .add(OnClickEventListener {
-                showToast("onClick ${it.position}")
+                showToast("onClick ${smartRecyclerAdapter.currentList[it.position].toString()}")
             })
             .add(OnLongClickEventListener {
                 showToast("onLongClick ${it.position}")
             })
             .add(AutoDragAndDropBinder(longPressDragEnabled = true) { event ->
                 supportActionBar?.subtitle =
-                    "onItemMoved from ${event.viewHolder.adapterPosition} to ${event.targetViewHolder.adapterPosition}"
+                    "onItemMoved from ${event.viewHolder.bindingAdapterPosition} to ${event.targetViewHolder.bindingAdapterPosition}"
             })
             .into<SmartRecyclerAdapter>(binding.recyclerView)
+
     }
 }

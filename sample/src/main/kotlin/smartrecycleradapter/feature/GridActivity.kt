@@ -2,6 +2,7 @@ package smartrecycleradapter.feature
 
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
@@ -21,7 +22,7 @@ import smartrecycleradapter.viewholder.ThumbViewHolder
  */
 
 class GridActivity : BaseSampleActivity() {
-
+    private lateinit var smartRecyclerAdapter: SmartRecyclerAdapter
     private val movieData: MovieData by lazy {
         AssetsUtils.loadStyleFromAssets<MovieData>(this, "main-movie-data.json")
     }
@@ -38,7 +39,24 @@ class GridActivity : BaseSampleActivity() {
             }
         }
 
-        val smartAdapter: SmartRecyclerAdapter = SmartRecyclerAdapter.empty()
+        smartRecyclerAdapter = SmartRecyclerAdapter.empty()
+            .setDiffCallback(object : DiffUtil.ItemCallback<Any>() {
+                override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+                    return when (oldItem) {
+                        is String -> newItem is String && oldItem == newItem
+                        is MovieModel -> newItem is MovieModel && oldItem.title == newItem.title && oldItem.category == newItem.category && oldItem.size == newItem.size
+                        else -> false
+                    }
+                }
+
+                override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+                    return when (oldItem) {
+                        is String -> newItem is String && oldItem == newItem
+                        is MovieModel -> newItem is MovieModel && oldItem == newItem
+                        else -> false
+                    }
+                }
+            })
             .map(String::class, HeaderViewHolder::class)
             .setViewTypeResolver { item, position ->
                 when (item) {
@@ -49,6 +67,7 @@ class GridActivity : BaseSampleActivity() {
                         "sci-fi" -> SciFiThumbViewHolder::class
                         else -> null
                     }
+
                     else -> null
                 }
             }
@@ -67,20 +86,21 @@ class GridActivity : BaseSampleActivity() {
                     )
                 ) {
                     supportActionBar?.subtitle =
-                        "onItemMoved from ${it.viewHolder.adapterPosition} to ${it.targetViewHolder.adapterPosition}"
+                        "onItemMoved from ${it.viewHolder.bindingAdapterPosition} to ${it.targetViewHolder.bindingAdapterPosition}"
                 }
             )
-            .into(binding.recyclerView)
+            .into<SmartRecyclerAdapter>(binding.recyclerView)
 
         // Set adapter data
-        smartAdapter.addItem("Coming soon")
-        smartAdapter.addItems(movieData.categories.find { it.id == "coming-soon" }!!.items)
-        smartAdapter.addItem("Action")
-        smartAdapter.addItems(movieData.categories.find { it.id == "action" }!!.items)
-        smartAdapter.addItem("Animated")
-        smartAdapter.addItems(movieData.categories.find { it.id == "anim" }!!.items)
-        smartAdapter.addItem("Sci-Fi")
-        smartAdapter.addItems(movieData.categories.find { it.id == "sci-fi" }!!.items)
+        smartRecyclerAdapter.addItem("Coming soon", notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItems(movieData.categories.find { it.id == "coming-soon" }!!.items, notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItem("Action", notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItems(movieData.categories.find { it.id == "action" }!!.items, notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItem("Animated", notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItems(movieData.categories.find { it.id == "anim" }!!.items, notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItem("Sci-Fi", notifyDataSetChanged = false)
+        smartRecyclerAdapter.addItems(movieData.categories.find { it.id == "sci-fi" }!!.items, notifyDataSetChanged = false)
+        smartRecyclerAdapter.commitPendingItems()
     }
 
     class ComingSoonThumbViewHolder(parentView: ViewGroup) : ThumbViewHolder(parentView)

@@ -6,6 +6,7 @@ package smartrecycleradapter.feature
  */
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
@@ -39,14 +40,14 @@ class EndlessScrollActivity : BaseSampleActivity() {
     }
 
     private fun addMoreStuff() {
-        runDelayed {
+        lifecycleScope.runDelayed {
             smartAdapter.addItems((itemCount + 1..itemCount + 20).toList())
             itemCount += 20
         }
     }
 
     private fun disableScroll() {
-        runDelayed {
+        lifecycleScope.runDelayed {
             smartAdapter.isEndlessScrollEnabled = false
             showToast("No more items to load")
         }

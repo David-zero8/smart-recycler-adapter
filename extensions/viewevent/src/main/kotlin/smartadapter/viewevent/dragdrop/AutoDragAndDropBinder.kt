@@ -6,7 +6,9 @@ package smartadapter.viewevent.dragdrop
  */
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.MotionEvent
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import smartadapter.SmartRecyclerAdapter
 import smartadapter.SmartViewHolderType
@@ -44,15 +46,14 @@ class AutoDragAndDropBinder(
     ): Boolean {
         val moved = super.onMove(recyclerView, viewHolder, target)
         if (moved) {
-            val oldPosition = viewHolder.adapterPosition
-            val newPosition = target.adapterPosition
-            with (smartRecyclerAdapter) {
-                //val targetItem = getItems()[oldPosition]
-                //getItems().removeAt(oldPosition)
-                //getItems().add(newPosition, targetItem)
-                Collections.swap(getItems(), oldPosition, newPosition)
-                notifyItemMoved(oldPosition, newPosition)
+            val oldPosition = viewHolder.bindingAdapterPosition
+            val newPosition = target.bindingAdapterPosition
+
+            if (oldPosition in smartRecyclerAdapter.currentList.indices && newPosition in smartRecyclerAdapter.currentList.indices) {
+                smartRecyclerAdapter.swapItems(oldPosition, newPosition, true)
+                return true
             }
+            return false
         }
         return moved
     }

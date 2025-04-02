@@ -41,7 +41,7 @@ class SwipeRemoveItemActivity : BaseSampleActivity() {
             })
             .add(SwipeRemoveItemBinder(ItemTouchHelper.LEFT) {
                 // Remove item from SmartRecyclerAdapter data set
-                smartRecyclerAdapter.removeItem(it.viewHolder.adapterPosition)
+                smartRecyclerAdapter.removeItem(it.viewHolder.bindingAdapterPosition)
             })
             .into(binding.recyclerView)
     }

@@ -11,11 +11,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.zero8.smartrecycleradapter.sample.databinding.NestedRecyclerViewBinding
 import smartadapter.nestedadapter.SmartNestedRecyclerViewHolder
-import smartadapter.viewholder.BindingSmartViewHolderr
+import smartadapter.viewholder.BindingSmartViewHolder
 import smartrecycleradapter.models.MovieCategory
 
 open class NestedRecyclerViewHolder(parentView: ViewGroup) :
-    BindingSmartViewHolderr<MovieCategory, NestedRecyclerViewBinding>(
+    BindingSmartViewHolder<MovieCategory, NestedRecyclerViewBinding>(
         NestedRecyclerViewBinding.inflate(LayoutInflater.from(parentView.context), parentView, false)
     ), SmartNestedRecyclerViewHolder {
 

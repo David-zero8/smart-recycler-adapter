@@ -3,8 +3,11 @@ package smartrecycleradapter
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityMovieCategoryDetailsBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import smartadapter.Position
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartadapter.SmartRecyclerAdapter
@@ -88,17 +91,14 @@ class MovieCategoryDetailsActivity : AppCompatActivity() {
                     .setOnLoadMoreListener { adapter, loadMoreViewHolder ->
                         if (!adapter.isLoading) {
                             adapter.isLoading = true
-
-                            Handler().postDelayed(
-                                {
-                                    adapter.addItems(movieItems)
-                                    if (endlessScrollCount++ == 3) {
-                                        adapter.isEndlessScrollEnabled = false
-                                    }
-                                    adapter.isLoading = false
-                                },
-                                3000
-                            )
+                            lifecycleScope.launch {
+                                delay(3000)
+                                adapter.addItems(movieItems)
+                                if (endlessScrollCount++ == 3) {
+                                    adapter.isEndlessScrollEnabled = false
+                                }
+                                adapter.isLoading = false
+                            }
                         }
                     }
                     .map(String::class, HeaderViewHolder::class)

@@ -65,14 +65,14 @@ class SmartNestedAdapterBinder(
             return
         }
 
-        val items = (adapter.getItem(viewHolder.adapterPosition) as SmartNestedItem<*>).items
+        val items = (adapter.getItem(viewHolder.bindingAdapterPosition) as SmartNestedItem<*>).items
         (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.adapter =
             nestedAdapters[viewHolder]!!.also {
                 it.setItems(items as MutableList<*>)
             }
 
         // Restore scroll state
-        (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.layoutManager?.onRestoreInstanceState(scrollStates[viewHolder.adapterPosition])
+        (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.layoutManager?.onRestoreInstanceState(scrollStates[viewHolder.bindingAdapterPosition])
     }
 
     override fun onViewRecycled(adapter: SmartRecyclerAdapter, viewHolder: SmartViewHolder<Any>) {
@@ -81,7 +81,7 @@ class SmartNestedAdapterBinder(
         }
 
         // Save scroll state
-        scrollStates[viewHolder.adapterPosition] = (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.layoutManager?.onSaveInstanceState()
+        scrollStates[viewHolder.bindingAdapterPosition] = (viewHolder as SmartNestedRecyclerViewHolder).recyclerView.layoutManager?.onSaveInstanceState()
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

@@ -8,6 +8,8 @@ package smartrecycleradapter.extension
 import android.app.Activity
 import android.content.Context
 import android.graphics.Point
+import android.os.Build
+import android.util.DisplayMetrics
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,10 +49,16 @@ class PreCachingLinearLayoutManager : LinearLayoutManager {
         private val DEFAULT_EXTRA_LAYOUT_SPACE = 600
 
         fun getInstance(activity: Activity): PreCachingLinearLayoutManager {
-            // Setup layout manager
-            val size = Point()
-            activity.windowManager.defaultDisplay.getSize(size)
-            val height = size.y
+            val height = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                val windowMetrics = activity.windowManager.currentWindowMetrics
+                windowMetrics.bounds.height()
+            } else {
+                val displayMetrics = DisplayMetrics()
+                @Suppress("DEPRECATION")
+                activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+                displayMetrics.heightPixels
+            }
+
             val preCachingLinearLayoutManager = PreCachingLinearLayoutManager(activity)
             preCachingLinearLayoutManager.orientation = RecyclerView.VERTICAL
             preCachingLinearLayoutManager.setExtraLayoutSpace(height * 2)

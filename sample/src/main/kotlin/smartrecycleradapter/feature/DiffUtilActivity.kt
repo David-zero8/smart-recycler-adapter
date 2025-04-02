@@ -3,11 +3,9 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
 import smartadapter.SmartRecyclerAdapter
-import smartadapter.diffutil.DiffUtilExtension
-import smartadapter.diffutil.SimpleDiffUtilExtension
-import smartadapter.diffutil.extension.diffSwapList
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import kotlin.random.Random.Default.nextInt
 
@@ -23,13 +21,19 @@ class DiffUtilActivity : BaseSampleActivity() {
 
     private lateinit var smartRecyclerAdapter: SmartRecyclerAdapter
 
-    private val predicate = object : DiffUtilExtension.DiffPredicate<Int> {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
-            return oldItem == newItem
+    private val predicate = object : DiffUtil.ItemCallback<Any>() {
+        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return when(oldItem) {
+                is Int -> oldItem == newItem
+                else -> false
+            }
         }
 
-        override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return when(oldItem) {
+                is Int -> oldItem == newItem
+                else -> false
+            }
         }
     }
 
@@ -39,9 +43,10 @@ class DiffUtilActivity : BaseSampleActivity() {
 
         smartRecyclerAdapter = SmartRecyclerAdapter
             .items(items)
+            .setDiffCallback(predicate)
             .map(Integer::class, SimpleItemViewHolder::class)
-            .add(SimpleDiffUtilExtension(predicate))
             .into(binding.recyclerView)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,11 +62,11 @@ class DiffUtilActivity : BaseSampleActivity() {
                 binding.recyclerView.smoothScrollToPosition(0)
             }
             R.id.sort -> {
-                smartRecyclerAdapter.diffSwapList(items)
+                smartRecyclerAdapter.submitList(items.toMutableList<Any>())
                 binding.recyclerView.scrollToPosition(0)
             }
             R.id.shuffle -> {
-                smartRecyclerAdapter.diffSwapList(
+                smartRecyclerAdapter.submitList(
                     items.shuffled()
                         .filter {
                             it % nextInt(1, maxItemCount/5) == 1

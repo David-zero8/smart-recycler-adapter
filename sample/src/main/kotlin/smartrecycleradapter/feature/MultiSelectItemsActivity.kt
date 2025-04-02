@@ -81,7 +81,5 @@ class MultiSelectItemsActivity : BaseSampleActivity() {
             "${multiItemSelectViewModel.viewEventListener.selectedItemsCount} / ${it.adapter.itemCount} selected"
 
         deleteMenuItem?.isVisible = multiItemSelectViewModel.viewEventListener.selectedItemsCount > 0
-
-        smartRecyclerAdapter.smartNotifyItemChanged(it.position)
     }
 }

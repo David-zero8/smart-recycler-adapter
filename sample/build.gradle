@@ -117,7 +117,6 @@ dependencies {
     //implementation 'io.github.manneohlund:smart-recycler-adapter-filter:1.0.0-alpha01'
 
     implementation project(':smartadapter')
-    implementation project(path: ':extensions:diffutil')
     implementation project(path: ':extensions:viewevent')
     implementation project(path: ':extensions:nestedadapter')
     implementation project(path: ':extensions:stickyheader')

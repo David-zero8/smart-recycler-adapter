@@ -24,7 +24,7 @@ abstract class SmartViewHolder<T : Any>(view: View) : RecyclerView.ViewHolder(vi
     )
 }
 
-abstract class BindingSmartViewHolderr<T : Any, T2: ViewDataBinding> : SmartViewHolder<T>,
+abstract class BindingSmartViewHolder<T : Any, T2: ViewDataBinding> : SmartViewHolder<T>,
     SmartAdapterHolder {
     override var smartRecyclerAdapter: SmartRecyclerAdapter? = null
     var binding: T2

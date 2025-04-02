@@ -8,20 +8,31 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.CompoundButton
 import androidx.activity.viewModels
+import androidx.annotation.IdRes
+import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
+import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
+import smartadapter.SmartViewHolderType
+import smartadapter.ViewId
+import smartadapter.extension.findView
 import smartadapter.viewevent.listener.OnClickEventListener
+import smartadapter.viewevent.listener.OnMultiItemCheckListener
+import smartadapter.viewevent.listener.OnMultiItemSelectListener
 import smartadapter.viewevent.listener.OnSingleItemCheckListener
 import smartadapter.viewevent.model.ViewEvent
 import smartadapter.viewevent.viewmodel.ViewEventViewModel
+import smartadapter.viewholder.SmartViewHolder
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableRadioButtonViewHolder
+import kotlin.reflect.KClass
 
 class SingleSelectRadioButtonItemActivity : BaseSampleActivity() {
 
-    class SingleItemCheckedViewModel : ViewEventViewModel<ViewEvent, OnSingleItemCheckListener>(
-        OnSingleItemCheckListener(viewId = R.id.radioButton)
+    class SingleItemCheckedViewModel : ViewEventViewModel<ViewEvent, OnSingleRadioButtonCheckListener>(
+        OnSingleRadioButtonCheckListener(viewId = R.id.constraintLauoutRoot)
     )
 
     lateinit var smartRecyclerAdapter: SmartRecyclerAdapter
@@ -33,16 +44,14 @@ class SingleSelectRadioButtonItemActivity : BaseSampleActivity() {
 
         supportActionBar?.title = "Single RadioButton Select"
 
-        val items = (0..100).toMutableList()
+        val items = (0..100).map { CheckItem(false, it) }.toMutableList()
 
         smartRecyclerAdapter = SmartRecyclerAdapter
             .items(items)
-            .map(Integer::class, SimpleSelectableRadioButtonViewHolder::class)
+            .setDiffCallback(predicate)
+            .map(CheckItem::class, SimpleSelectableRadioButtonViewHolder::class)
             .add(singleItemCheckedViewModel.observe(this) {
                 handleCheckEvent(it)
-            })
-            .add(OnClickEventListener {
-                showToast("onClick ${it.position}")
             })
             .into(binding.recyclerView)
     }
@@ -64,10 +73,75 @@ class SingleSelectRadioButtonItemActivity : BaseSampleActivity() {
     }
 
     private fun handleCheckEvent(it: ViewEvent) {
-        showToast("Item click ${it.position}\n" +
+        showToast("Item click ${(smartRecyclerAdapter.getItems()[it.position] as CheckItem).index}\n" +
                 "${singleItemCheckedViewModel.viewEventListener.selectedItemsCount} of " +
                 "${smartRecyclerAdapter.itemCount} selected items")
 
+        val list = smartRecyclerAdapter.getItems().mapIndexed { index, item ->
+            (item as CheckItem).copy(checked = singleItemCheckedViewModel.viewEventListener.isSelected(index), index = item.index)
+        }.toMutableList()
+        smartRecyclerAdapter.setItems(list)
+
         deleteMenuItem?.isVisible = singleItemCheckedViewModel.viewEventListener.selectedItemsCount > 0
     }
+
+    val predicate = object : DiffUtil.ItemCallback<Any>() {
+        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return when (oldItem) {
+                is CheckItem -> true
+                else -> false
+            }
+        }
+
+        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+            return when (oldItem) {
+                is CheckItem -> newItem is CheckItem && oldItem.index == newItem.index && oldItem.checked == newItem.checked
+                else -> false
+            }
+        }
+    }
+
 }
+
+data class CheckItem(var checked: Boolean, var index: Int)
+
+
+open class OnSingleRadioButtonCheckListener(
+    override val identifier: Any = OnMultiItemCheckListener::class,
+    override val viewHolderType: SmartViewHolderType = SmartViewHolder::class,
+    selectableItemType: KClass<*> = Any::class,
+    @IdRes viewId: ViewId = io.github.zero8.smartrecycleradapter.R.id.undefined
+) : OnMultiItemSelectListener(
+    enableOnLongClick = false,
+    selectableItemType = selectableItemType,
+    viewId = viewId
+) {
+
+    override fun setSelected(
+        adapter: SmartRecyclerAdapter,
+        viewHolder: SmartViewHolder<Any>
+    ) {
+
+    }
+
+    /**
+     * Adds the position to the data set and [.disable]s any old positions.
+     * @param position the adapter position
+     */
+    override fun enable(position: Position) {
+        for (oldPositions in selectedItems) {
+            disable(oldPositions)
+        }
+        clear()
+        super.enable(position)
+    }
+
+    /**
+     * Removes the position from the data set and calls [smartadapter.SmartRecyclerAdapter.smartNotifyItemChanged].
+     * @param position the adapter position
+     */
+    override fun disable(position: Position) {
+        super.disable(position)
+    }
+}
+

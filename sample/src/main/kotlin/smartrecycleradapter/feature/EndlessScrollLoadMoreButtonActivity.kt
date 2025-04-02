@@ -6,6 +6,7 @@ package smartrecycleradapter.feature
  */
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.runDelayed
@@ -23,7 +24,7 @@ class EndlessScrollLoadMoreButtonActivity : BaseSampleActivity() {
         SmartEndlessScrollRecyclerAdapter
             .items(items)
             .setOnLoadMoreListener { adapter, loadMoreViewHolder ->
-                runDelayed {
+                lifecycleScope.runDelayed {
                     adapter.addItems((itemCount + 1..itemCount + 20).toList())
                     itemCount += 20
                 }

@@ -261,7 +261,7 @@ class MyWatchListViewHolder :
 ```kotlin
 .add(SwipeRemoveItemBinder(ItemTouchHelper.LEFT) {
     // Remove item from SmartRecyclerAdapter data set
-    smartRecyclerAdapter.removeItem(it.viewHolder.adapterPosition)
+    smartRecyclerAdapter.removeItem(it.viewHolder.bindingAdapterPosition)
 })
 ```
 
@@ -273,7 +273,7 @@ class MyWatchListViewHolder :
     onItemSwipedListener = { viewHolder, direction ->
         showToast(viewHolder, direction)
         // Remove item from SmartRecyclerAdapter data set
-        smartRecyclerAdapter.removeItem(viewHolder.adapterPosition)
+        smartRecyclerAdapter.removeItem(viewHolder.bindingAdapterPosition)
     }
 })
 ```

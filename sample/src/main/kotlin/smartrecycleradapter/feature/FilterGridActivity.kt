@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityFilterItemBinding
 import smartadapter.Position
 import smartadapter.SmartRecyclerAdapter
-import smartadapter.diffutil.DiffUtilExtension
-import smartadapter.diffutil.SimpleDiffUtilExtension
-import smartadapter.diffutil.extension.diffSwapList
 import smartadapter.filter.FilterExtension
 import smartadapter.get
+import smartadapter.internal.extension.submitListWithLoading
 import smartadapter.viewevent.listener.OnClickEventListener
 import smartrecycleradapter.extension.GridAutoLayoutManager
 import smartrecycleradapter.models.MovieData
@@ -37,16 +35,6 @@ class FilterGridActivity : BaseSampleActivity() {
 
     lateinit var smartAdapter: SmartRecyclerAdapter
 
-    private val predicate = object : DiffUtilExtension.DiffPredicate<Any> {
-        override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return oldItem == newItem
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingFilter = ActivityFilterItemBinding.inflate(layoutInflater)
@@ -66,6 +54,7 @@ class FilterGridActivity : BaseSampleActivity() {
         }
 
         smartAdapter = SmartRecyclerAdapter.empty()
+            .setDiffCallback(SmartRecyclerAdapter.DEFAULT_DIFF_CALLBACK)
             .map(String::class, SmallHeaderViewHolder::class)
             .setViewTypeResolver { item, position ->
                 when (item) {
@@ -91,9 +80,6 @@ class FilterGridActivity : BaseSampleActivity() {
                     }
                 )
             )
-            .add(SimpleDiffUtilExtension(predicate) {
-                bindingFilter.toolbarProgressBar.visibility = if (it) View.VISIBLE else View.GONE
-            })
             .into(bindingFilter.recyclerView)
 
         // Set search view filter
@@ -113,43 +99,59 @@ class FilterGridActivity : BaseSampleActivity() {
         smartAdapter.addItem("Coming soon")
         with(movieData.categories.find { it.id == "coming-soon" }!!.items) {
             repeat(100) {
-                smartAdapter.addItems(shuffled())
+                smartAdapter.addItems(shuffled(), notifyDataSetChanged = false)
             }
         }
         smartAdapter.addItem("Action")
         with(movieData.categories.find { it.id == "action" }!!.items) {
             repeat(100) {
-                smartAdapter.addItems(shuffled())
+                smartAdapter.addItems(shuffled(), notifyDataSetChanged = false)
             }
         }
         smartAdapter.addItem("Animated")
         with(movieData.categories.find { it.id == "anim" }!!.items) {
             repeat(100) {
-                smartAdapter.addItems(shuffled())
+                smartAdapter.addItems(shuffled(), notifyDataSetChanged = false)
             }
         }
         smartAdapter.addItem("Sci-Fi")
         with(movieData.categories.find { it.id == "sci-fi" }!!.items) {
             repeat(100) {
-                smartAdapter.addItems(shuffled())
+                smartAdapter.addItems(shuffled(), notifyDataSetChanged = false)
             }
         }
+
+        smartAdapter.commitPendingItems {
+            setOriginalItems(smartAdapter.getItems())
+        }
+
     }
 
     fun filter(query: String?) {
         val filterExtension: FilterExtension = smartAdapter.get()
-        val diffExtension: SimpleDiffUtilExtension = smartAdapter.get()
 
         filterExtension.filter(lifecycleScope, query) {
             if (it.isSuccess) {
-                smartAdapter.diffSwapList(lifecycleScope, it.getOrDefault(listOf())) {
-                    supportActionBar?.subtitle = "${smartAdapter.itemCount} items filtered"
-                }
+                // 호출 부분
+                smartAdapter.submitListWithLoading(
+                    lifecycleScope,
+                    newList = it.getOrDefault(listOf()),
+                    onLoadingStateChanged = { isLoading ->
+                        bindingFilter.toolbarProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+                    },
+                    onListUpdated = {
+                        supportActionBar?.subtitle = "${smartAdapter.itemCount} items filtered"
+                    }
+                )
             } else {
-                diffExtension.cancelDiffSwapJob()
                 bindingFilter.recyclerView.scrollToPosition(0)
                 supportActionBar?.subtitle = "${smartAdapter.itemCount} items filtered"
             }
         }
+    }
+
+    fun setOriginalItems(items: List<Any>) {
+        val filterExtension: FilterExtension = smartAdapter.get()
+        filterExtension.setOriginalItems(items)
     }
 }

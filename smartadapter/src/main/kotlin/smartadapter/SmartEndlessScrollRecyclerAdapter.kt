@@ -7,6 +7,7 @@ package smartadapter
 
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.R
 import smartadapter.listener.OnLoadMoreListener
 import smartadapter.viewholder.LoadMoreViewHolder
@@ -16,7 +17,7 @@ import smartadapter.viewholder.SmartViewHolder
  * Enables endless scrolling or pagination. Let's the adapter show a [LoadMoreViewHolder] when scrolled to last item.
  */
 @Suppress("UNCHECKED_CAST")
-class SmartEndlessScrollRecyclerAdapter(items: MutableList<Any>) : SmartRecyclerAdapter(items), ISmartEndlessScrollRecyclerAdapter {
+class SmartEndlessScrollRecyclerAdapter(diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK, items: MutableList<Any>) : SmartRecyclerAdapter(diffCallback, items), ISmartEndlessScrollRecyclerAdapter {
 
     private val VIEW_TYPE_LOADING = Integer.MAX_VALUE
 
@@ -26,7 +27,6 @@ class SmartEndlessScrollRecyclerAdapter(items: MutableList<Any>) : SmartRecycler
     override var isEndlessScrollEnabled: Boolean = true
         set(enable) {
             field = enable
-            smartNotifyItemChanged(itemCount)
         }
     override var isLoading: Boolean = false
     override var autoLoadMoreEnabled: Boolean = false
@@ -76,6 +76,16 @@ class SmartEndlessScrollRecyclerAdapter(items: MutableList<Any>) : SmartRecycler
     }
 
     companion object {
+
+        val DEFAULT_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Any>() {
+            override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return oldItem.hashCode() == newItem.hashCode()
+            }
+
+            override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return false
+            }
+        }
 
         /**
          * Builder of [SmartRecyclerAdapter] for easy implementation.

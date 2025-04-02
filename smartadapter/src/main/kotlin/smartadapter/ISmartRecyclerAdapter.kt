@@ -85,6 +85,7 @@ interface ISmartRecyclerAdapter {
      * Calls [.setItems] with default notifyDataSetChanged to true.
      * @param items list of data items
      */
+    fun setItems(items: MutableList<*>, commitCallback : ()-> Unit)
     fun setItems(items: MutableList<*>)
 
     /**
@@ -92,6 +93,7 @@ interface ISmartRecyclerAdapter {
      * @param items list of data items
      * @param notifyDataSetChanged indicates if RecyclerView should update.
      */
+    fun setItems(items: MutableList<*>, notifyDataSetChanged: Boolean, commitCallback : ()-> Unit)
     fun setItems(items: MutableList<*>, notifyDataSetChanged: Boolean)
 
     /**
@@ -160,6 +162,7 @@ interface ISmartRecyclerAdapter {
      * @param index item index
      * @return true if item was removed
      */
+    fun removeItem(index: Int, commitCallback : (Boolean)-> Unit)
     fun removeItem(index: Int): Boolean
 
     /**
@@ -168,6 +171,7 @@ interface ISmartRecyclerAdapter {
      * @param notifyDataSetChanged updates recycler view with the new data
      * @return true if item was removed
      */
+    fun removeItem(index: Int, notifyDataSetChanged: Boolean, commitCallback : (Boolean)-> Unit)
     fun removeItem(index: Int, notifyDataSetChanged: Boolean): Boolean
 
     /**
@@ -190,55 +194,6 @@ interface ISmartRecyclerAdapter {
      * Clears all the data and calls [.smartNotifyDataSetChanged]
      */
     fun clear()
-
-    /**
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyDataSetChanged]
-     */
-    fun smartNotifyDataSetChanged()
-
-    /**
-     * Notifies the recycler adapter that item at position has changed.
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyItemChanged]
-     * @param position adapter position.
-     */
-    fun smartNotifyItemChanged(position: Position)
-
-    /**
-     * Notifies the recycler adapter that item range at position has changed.
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyItemRangeChanged]
-     * @param positionStart from position
-     * @param itemCount item count from positionStart
-     */
-    fun smartNotifyItemRangeChanged(positionStart: Int, itemCount: Int)
-
-    /**
-     * Notifies the recycler adapter that item at position has been inserted.
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyItemInserted]
-     * @param position item inserted at this position
-     */
-    fun smartNotifyItemInserted(position: Position)
-
-    /**
-     * Notifies the recycler adapter that item range from position has changed.
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyItemRangeInserted]
-     * @param positionStart from position
-     * @param itemCount item count from positionStart
-     */
-    fun smartNotifyItemRangeInserted(positionStart: Int, itemCount: Int)
-
-    /**
-     * Notifies the recycler adapter that item at position has been removed.
-     * @param position item removed at this position
-     */
-    fun smartNotifyItemRemoved(position: Position)
-
-    /**
-     * Notifies the recycler adapter that item range from position has been removed.
-     * Calls [.updateItemCount] and [RecyclerView.Adapter.notifyItemRangeRemoved]
-     * @param positionStart from position
-     * @param itemCount item count from positionStart
-     */
-    fun smartNotifyItemRangeRemoved(positionStart: Int, itemCount: Int)
 
     /**
      * Updated the SmartRecyclerAdapter item count.

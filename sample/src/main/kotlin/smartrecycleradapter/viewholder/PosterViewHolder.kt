@@ -38,7 +38,7 @@ class PosterViewHolder(parentView: ViewGroup) :
                 OnPlayLongClick(
                     smartRecyclerAdapter!!,
                     this@PosterViewHolder,
-                    adapterPosition,
+                    bindingAdapterPosition,
                     playButton
                 )
             )

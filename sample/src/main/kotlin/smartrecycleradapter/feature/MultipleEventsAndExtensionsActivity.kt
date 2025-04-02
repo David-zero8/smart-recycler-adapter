@@ -32,14 +32,14 @@ class MultipleEventsAndExtensionsActivity : BaseSampleActivity() {
             .items(items)
             .map(Integer::class, SimpleItemViewHolder::class)
             .add(OnClickEventListener {
-                showToast("onClick ${it.position}")
+                showToast("onClick ${smartRecyclerAdapter.currentList[it.position].toString()}")
             })
             .add(OnLongClickEventListener {
                 showToast("onLongClick ${it.position}")
             })
             .add(AutoDragAndDropBinder(ItemTouchHelper.UP or ItemTouchHelper.DOWN, longPressDragEnabled = true) { event ->
                 supportActionBar?.subtitle =
-                    "onItemMoved from ${event.viewHolder.adapterPosition} to ${event.targetViewHolder.adapterPosition}"
+                    "onItemMoved from ${event.viewHolder.bindingAdapterPosition} to ${event.targetViewHolder.bindingAdapterPosition}"
             })
             .add(AutoRemoveItemSwipeEventBinder(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) { event ->
                 showToast(event.viewHolder, event.direction)
@@ -55,7 +55,7 @@ class MultipleEventsAndExtensionsActivity : BaseSampleActivity() {
         }
         Toast.makeText(
             applicationContext,
-            "onItemSwiped @ ${viewHolder.adapterPosition}, $directionStr",
+            "onItemSwiped @ ${viewHolder.bindingAdapterPosition}, $directionStr",
             Toast.LENGTH_SHORT
         ).show()
     }

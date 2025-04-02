@@ -16,10 +16,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.github.zero8.smartrecycleradapter.sample.BuildConfig
 import io.github.zero8.smartrecycleradapter.sample.R
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import smartadapter.Position
 import smartadapter.SmartEndlessScrollRecyclerAdapter
 import smartadapter.SmartRecyclerAdapter
@@ -51,7 +54,6 @@ import smartrecycleradapter.feature.MultipleExpandableItemHeaderActivity
 import smartrecycleradapter.feature.MultipleViewTypesResolverActivity
 import smartrecycleradapter.feature.NestedSmartRecyclerAdaptersActivity
 import smartrecycleradapter.feature.SimpleFilterActivity
-import smartrecycleradapter.feature.SimpleFilterDiffSwapActivity
 import smartrecycleradapter.feature.SimpleItemActivity
 import smartrecycleradapter.feature.SimpleItemOnClickOnLongClickActivity
 import smartrecycleradapter.feature.SingleExpandableItemActivity
@@ -108,8 +110,13 @@ class DemoActivity : AppCompatActivity() {
 
         initSmartRecyclerAdapter()
         initMoreDemosButton()
+//        moreSamplesDialog.show()
+
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
     private fun initSmartRecyclerAdapter() {
         val items = mutableListOf<Any>()
         items.addAll(movieData.categories)
@@ -247,7 +254,7 @@ class DemoActivity : AppCompatActivity() {
                 }
             })
             .add(OnClickEventListener(PosterViewHolder::class) {
-                mainSmartMovieAdapter.smartNotifyItemChanged(0)
+//                mainSmartMovieAdapter.smartNotifyItemChanged(0)
             })
             .add(OnClickEventListener(PosterViewHolder::class, R.id.playButton) {
                 showToast("PLAY")
@@ -302,17 +309,18 @@ class DemoActivity : AppCompatActivity() {
         loadMoreViewHolder: LoadMoreViewHolder
     ) {
         val indexBeforeCopyright = 2
-        Handler().postDelayed({
+        lifecycleScope.launch {
+            delay(800)  // 0.8초 대기
             adapter.addItem(
                 adapter.itemCount - indexBeforeCopyright,
                 movieBannersData.categories.first()
             )
             loadMoreViewHolder.toggleLoading(false)
-        }, 800)
+        }
     }
 
     private fun nestedLoadMoreComingSoonItems(adapter: SmartEndlessScrollRecyclerAdapter) {
-        runDelayed {
+        lifecycleScope.runDelayed {
             adapter.addItems(movieData.categories.first {
                 it.id == "coming-soon"
             }.items.shuffled())
@@ -375,10 +383,6 @@ class DemoActivity : AppCompatActivity() {
             SampleFabViewHolder.SimpleFabItem(
                 R.drawable.ic_baseline_filter_list_24,
                 "Simple Filter"
-            ),
-            SampleFabViewHolder.SimpleFabItem(
-                R.drawable.ic_baseline_filter_list_24_1,
-                "Simple Filter & Diff swap"
             ),
             SampleFabViewHolder.SimpleFabItem(
                 R.drawable.ic_baseline_filter_list_24_2,
@@ -462,8 +466,6 @@ class DemoActivity : AppCompatActivity() {
                         startActivity(GridActivity::class)
                     R.drawable.ic_baseline_filter_list_24 ->
                         startActivity(SimpleFilterActivity::class)
-                    R.drawable.ic_baseline_filter_list_24_1 ->
-                        startActivity(SimpleFilterDiffSwapActivity::class)
                     R.drawable.ic_baseline_filter_list_24_2 ->
                         startActivity(FilterGridActivity::class)
                     R.drawable.ic_sample_select_all_black_24dp ->

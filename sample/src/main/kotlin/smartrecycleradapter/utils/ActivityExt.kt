@@ -1,15 +1,16 @@
 package smartrecycleradapter.utils
 
-import android.os.Handler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /*
  * Created by Manne Öhlund on 2019-12-12.
  * Copyright (c) All rights reserved.
  */
- 
- inline fun runDelayed(delay: Long = 800, crossinline action: () -> Unit) {
-     Handler().postDelayed({
-         action.invoke()
-     }, delay)
- }
+
+fun CoroutineScope.runDelayed(delayMillis: Long = 800, action: () -> Unit) = launch {
+    delay(delayMillis)
+    action()
+}

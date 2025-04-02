@@ -58,7 +58,7 @@ open class BasicSwipeEventBinder(
                 ViewEvent.OnItemSwiped(
                     smartRecyclerAdapter,
                     viewHolder as SmartViewHolder<*>,
-                    viewHolder.adapterPosition,
+                    viewHolder.bindingAdapterPosition,
                     viewHolder.itemView,
                     direction
                 )
@@ -68,7 +68,7 @@ open class BasicSwipeEventBinder(
             ViewEvent.OnItemSwiped(
                 smartRecyclerAdapter,
                 viewHolder as SmartViewHolder<*>,
-                viewHolder.adapterPosition,
+                viewHolder.bindingAdapterPosition,
                 viewHolder.itemView,
                 direction
             )

@@ -7,6 +7,7 @@ package smartadapter
 
 import android.content.Context
 import android.util.Log
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import smartadapter.extension.ItemTouchBinder
@@ -28,8 +29,10 @@ open class SmartAdapterBuilder {
     internal var viewTypeResolver: ViewTypeResolver? = null
     internal val viewHolderMapper = HashMap<String, SmartViewHolderType>()
     internal val smartExtensions = mutableMapOf<Any, SmartExtensionIdentifier>()
+    internal var diffCallback: DiffUtil.ItemCallback<Any> = SmartRecyclerAdapter.DEFAULT_DIFF_CALLBACK
 
-    internal open fun getSmartRecyclerAdapter() = SmartRecyclerAdapter(items.let {
+
+    internal open fun getSmartRecyclerAdapter() = SmartRecyclerAdapter(diffCallback, items.let {
         (if (it.isMutable()) it else it.toMutableList())
     })
 
@@ -60,6 +63,11 @@ open class SmartAdapterBuilder {
 
     fun setViewTypeResolver(viewTypeResolver: ViewTypeResolver): SmartAdapterBuilder {
         this.viewTypeResolver = viewTypeResolver
+        return this
+    }
+
+    fun setDiffCallback(diffCallback: DiffUtil.ItemCallback<Any>): SmartAdapterBuilder {
+        this.diffCallback = diffCallback
         return this
     }
 

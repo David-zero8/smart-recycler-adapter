@@ -25,6 +25,8 @@ import smartadapter.viewholder.SmartViewHolder
 import smartadapter.widget.ViewTypeResolver
 import java.util.ArrayList
 import java.util.HashMap
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import kotlin.reflect.KClass
 
 /**
@@ -57,25 +59,76 @@ typealias Position = Int
  * It handles all the implementations of the [ISmartRecyclerAdapter] functionality.
  */
 @Suppress("UNCHECKED_CAST")
-open class SmartRecyclerAdapter
-    internal constructor(private var items: MutableList<Any>)
-        : RecyclerView.Adapter<SmartViewHolder<Any>>(), ISmartRecyclerAdapter {
+open class SmartRecyclerAdapter(diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK,items: MutableList<Any>)
+    : ListAdapter<Any, SmartViewHolder<Any>>(diffCallback), ISmartRecyclerAdapter {
 
+    companion object {
+        val DEFAULT_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Any>() {
+            override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return when (oldItem) {
+                    is Int -> newItem is Int && oldItem == newItem
+                    is Long -> newItem is Long && oldItem == newItem
+                    is Float -> newItem is Float && oldItem == newItem
+                    is Double -> newItem is Double && oldItem == newItem
+                    is String -> newItem is String && oldItem == newItem
+                    is Char -> newItem is Char && oldItem == newItem
+                    is Boolean -> newItem is Boolean && oldItem == newItem
+                    is Integer -> newItem is Integer && oldItem == newItem
+                    else -> false
+                }
+            }
+
+            override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
+                return when (oldItem) {
+                    is Int -> newItem is Int && oldItem == newItem
+                    is Long -> newItem is Long && oldItem == newItem
+                    is Float -> newItem is Float && oldItem == newItem
+                    is Double -> newItem is Double && oldItem == newItem
+                    is String -> newItem is String && oldItem == newItem
+                    is Char -> newItem is Char && oldItem == newItem
+                    is Boolean -> newItem is Boolean && oldItem == newItem
+                    is Integer -> newItem is Integer && oldItem == newItem
+                    else -> false
+                }
+            }
+        }
+
+        fun items(items: List<Any>): SmartAdapterBuilder = SmartAdapterBuilder().setItems(items)
+        fun empty(): SmartAdapterBuilder = SmartAdapterBuilder()
+    }
+
+    // 기존 SmartRecyclerAdapter와 동일하게 유지
     override var smartItemCount: Int = 0
     override var viewHolderMapper: ViewHolderMapper = ViewHolderMapper()
     override var viewTypeResolver: ViewTypeResolver? = null
     final override val smartExtensions = mutableMapOf<Any, SmartExtensionIdentifier>()
+    private var pendingList: MutableList<Any>? = null
 
     init {
-        setItems(items, false)
+        submitList(items)
         updateItemCount()
     }
 
-    override fun getItemViewType(position: Position): ViewType {
-        return viewHolderMapper.getItemViewType(viewTypeResolver, items[position], position)
+
+    /**
+     * ListAdapter 내부 목록(currentList)에 대한 사이즈 반환
+     */
+    override fun getItemCount(): Int {
+        // ListAdapter가 관리하는 현재 목록
+        smartItemCount = currentList.size
+        return smartItemCount
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: ViewType): SmartViewHolder<Any> {
+    override fun <T : Any> getItemCount(type: KClass<out T>): Int {
+        // 예: currentList 중 해당 클래스 타입과 일치하는 아이템만 카운트
+        return currentList.count { it::class == type }
+    }
+
+    /**
+     * onCreateViewHolder 구현
+     * (기존 SmartRecyclerAdapter에서 사용하던 확장(extension) 로직을 그대로 유지)
+     */
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmartViewHolder<Any> {
         val smartViewHolder = viewHolderMapper.createViewHolder<SmartViewHolder<Any>>(parent, viewType)
         if (smartViewHolder is SmartAdapterHolder && smartViewHolder.smartRecyclerAdapter == null) {
             smartViewHolder.smartRecyclerAdapter = this
@@ -92,58 +145,59 @@ open class SmartRecyclerAdapter
         return smartViewHolder
     }
 
-    override fun onBindViewHolder(smartViewHolder: SmartViewHolder<Any>, position: Position) {
-        smartViewHolder.bind(items[position])
+    /**
+     * onBindViewHolder 구현
+     */
+    override fun onBindViewHolder(holder: SmartViewHolder<Any>, position: Int) {
+        val item = getItem(position) // ListAdapter가 제공하는 메서드
+        holder.bind(item)
         smartExtensions.values.forEach { extension ->
             if (extension is SmartViewHolderBinder
                 && (extension.viewHolderType == SmartViewHolder::class
-                        || extension.viewHolderType.isInstance(smartViewHolder))
+                        || extension.viewHolderType.isInstance(holder))
                 && extension is OnBindViewHolderListener
             ) {
-                extension.onBindViewHolder(this, smartViewHolder)
+                extension.onBindViewHolder(this, holder)
             }
         }
     }
 
-    override fun onBindViewHolder(
-        smartViewHolder: SmartViewHolder<Any>,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        super.onBindViewHolder(smartViewHolder, position, payloads)
-        if (items.size != position) {
-            smartViewHolder.bind(items[position], payloads)
-        }
-        smartExtensions.values.forEach { extension ->
-            if (extension is SmartViewHolderBinder
-                && (extension.viewHolderType == SmartViewHolder::class
-                        || extension.viewHolderType.isInstance(smartViewHolder))
-                && extension is OnBindViewHolderListener
-            ) {
-                extension.onBindViewHolder(this, smartViewHolder, payloads)
-            }
-        }
+    /**
+     * getItemViewType 구현
+     */
+    override fun getItemViewType(position: Int): Int {
+        return viewHolderMapper.getItemViewType(viewTypeResolver, getItem(position), position)
     }
 
-    override fun onViewRecycled(smartViewHolder: SmartViewHolder<Any>) {
-        super.onViewRecycled(smartViewHolder)
-        smartViewHolder.unbind()
+    /**
+     * viewHolder 재활용, attach/detach 등
+     * 기존 SmartRecyclerAdapter와 동일하게 유지
+     */
+    override fun onViewRecycled(holder: SmartViewHolder<Any>) {
+        super.onViewRecycled(holder)
+        holder.unbind()
         smartExtensions.values.forEach { extension ->
             if (extension is SmartViewHolderBinder
                 && (extension.viewHolderType == SmartViewHolder::class
-                        || extension.viewHolderType.isInstance(smartViewHolder))
+                        || extension.viewHolderType.isInstance(holder))
                 && extension is OnViewRecycledListener
             ) {
-                extension.onViewRecycled(this, smartViewHolder)
+                extension.onViewRecycled(this, holder)
             }
         }
     }
 
-    override fun onFailedToRecycleView(smartViewHolder: SmartViewHolder<Any>): Boolean {
-        return if (smartViewHolder is RecyclableViewHolder) {
-            smartViewHolder.onFailedToRecycleView()
-        } else {
-            super.onFailedToRecycleView(smartViewHolder)
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        smartExtensions.values.forEach { extension ->
+            (extension as? OnAttachedToRecyclerViewListener)?.onAttachedToRecyclerView(recyclerView)
+        }
+    }
+
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView)
+        smartExtensions.values.forEach { extension ->
+            (extension as? OnDetachedFromRecyclerViewListener)?.onDetachedFromRecyclerView(recyclerView)
         }
     }
 
@@ -163,57 +217,60 @@ open class SmartRecyclerAdapter
         }
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        smartExtensions.values.forEach { extension ->
-            (extension as? OnAttachedToRecyclerViewListener)?.onAttachedToRecyclerView(recyclerView)
+    /**
+     * ISmartRecyclerAdapter의 주요 메서드 구현
+     * => 내부적으로 ListAdapter의 currentList를 복사하여 조작 후 submitList() 사용
+     */
+    override fun getItems(): MutableList<Any> {
+        return currentList.toMutableList()
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getItems(type: KClass<out T>): kotlin.collections.ArrayList<T> {
+        return currentList.filter { it::class == type } as kotlin.collections.ArrayList<T>
+    }
+
+    override fun getItem(index: Int): Any {
+        return super.getItem(index)
+    }
+
+    override fun <T : Any> getItemCast(index: Int): T {
+        return getItem(index) as T
+    }
+
+    override fun setItems(items: MutableList<*>, commitCallback : () -> Unit) {
+        // 완전히 새로운 목록을 전달
+        submitList(items as List<Any>) {
+            commitCallback.invoke()
         }
-    }
-
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
-        smartExtensions.values.forEach { extension ->
-            (extension as? OnDetachedFromRecyclerViewListener)?.onDetachedFromRecyclerView(recyclerView)
-        }
-    }
-
-    override fun getItemCount(): Int = smartItemCount
-
-    override fun <T : Any> getItemCount(type: KClass<out T>): Int {
-        return items.count { it::class == type }
-    }
-
-    override fun getItem(index: Int): Any = items[index]
-
-    override fun <T : Any> getItemCast(index: Int): T = items[index] as T
-
-    override fun getItems(): MutableList<Any> = items
-
-    override fun <T : Any> getItems(type: KClass<out T>): ArrayList<T> {
-        return items.filter {
-            it::class == type
-        } as ArrayList<T>
+        clearPendingItems()
     }
 
     override fun setItems(items: MutableList<*>) {
-        setItems(items, true)
+        setItems(items, {})
     }
 
-    final override fun setItems(items: MutableList<*>, notifyDataSetChanged: Boolean) {
-        this.items = items as MutableList<Any>
-        if (notifyDataSetChanged) {
-            smartNotifyDataSetChanged()
+    override fun setItems(items: MutableList<*>, notifyDataSetChanged: Boolean, commitCallback : ()-> Unit) {
+        // ListAdapter에서 notifyDataSetChanged 파라미터는 의미가 없지만
+        // 호환성을 위해 동일한 시그니처 유지
+        submitList(items as List<Any>) {
+            commitCallback.invoke()
         }
+        clearPendingItems()
+    }
+
+    override fun setItems(items: MutableList<*>, notifyDataSetChanged: Boolean) {
+        setItems(items, notifyDataSetChanged, {})
     }
 
     override fun addItem(item: Any) {
-        this.addItem(item, true)
+        addItem(item, true)
     }
 
     override fun addItem(item: Any, notifyDataSetChanged: Boolean) {
-        this.items.add(item)
+        getOrCreatePendingList().add(item)
         if (notifyDataSetChanged) {
-            smartNotifyDataSetChanged()
+            commitPendingItems()
         }
     }
 
@@ -222,102 +279,128 @@ open class SmartRecyclerAdapter
     }
 
     override fun addItem(index: Int, item: Any, notifyDataSetChanged: Boolean) {
-        this.items.add(index, item)
+        getOrCreatePendingList().add(index, item)
         if (notifyDataSetChanged) {
-            smartNotifyItemInserted(index)
+            commitPendingItems()
         }
     }
 
     override fun addItems(items: List<Any>) {
-        this.addItems(items, true)
+        addItems(items, true)
     }
 
     override fun addItems(items: List<Any>, notifyDataSetChanged: Boolean) {
-        this.items.addAll(items)
+        getOrCreatePendingList().addAll(items)
         if (notifyDataSetChanged) {
-            smartNotifyItemRangeInserted(itemCount, items.size)
+            commitPendingItems()
         }
     }
 
     override fun addItems(index: Int, items: List<Any>) {
-        this.addItems(index, items, true)
+        addItems(index, items, true)
     }
 
     override fun addItems(index: Int, items: List<Any>, notifyDataSetChanged: Boolean) {
-        this.items.addAll(index, items)
+        getOrCreatePendingList().addAll(index, items)
         if (notifyDataSetChanged) {
-            smartNotifyItemRangeInserted(index, items.size)
+            commitPendingItems()
+        }
+    }
+
+    // 현재리스트를 기반으로 pendingList가 없으면 생성하거나 가져오는 함수
+    private fun getOrCreatePendingList(): MutableList<Any> {
+        if (pendingList == null) {
+            pendingList = currentList.toMutableList()
+        }
+        return pendingList!!
+    }
+
+    // 변경사항을 실제 화면에 적용
+    fun commitPendingItems(commitCallback : ()-> Unit = {}) {
+        pendingList?.let {
+            submitList(it) {
+                commitCallback.invoke()
+            }
+            clearPendingItems()
+        }
+    }
+
+    // 팬딩리스트 클리어 (취소 시)
+    fun clearPendingItems() {
+        pendingList = null
+    }
+
+    fun swapItems(fromPosition: Int, toPosition: Int, notifyImmediately: Boolean = false) {
+        val list = getOrCreatePendingList()
+
+        if (fromPosition !in list.indices || toPosition !in list.indices) return
+
+        val item = list.removeAt(fromPosition)
+        list.add(toPosition, item)
+
+        if (notifyImmediately) {
+            commitPendingItems()
         }
     }
 
     override fun removeItem(index: Int): Boolean {
-        return this.removeItem(index, true)
+        return removeItem(index, true)
     }
 
     override fun removeItem(index: Int, notifyDataSetChanged: Boolean): Boolean {
-        if (items.isNotEmpty()) {
-            this.items.removeAt(index)
-            if (notifyDataSetChanged) {
-                smartNotifyItemRemoved(index)
-            }
+        val newList = currentList.toMutableList()
+        if (newList.isNotEmpty()) {
+            newList.removeAt(index)
+            submitList(newList)
+            clearPendingItems()
             return true
         }
         return false
     }
+
+    override fun removeItem(index: Int, commitCallback : (Boolean)-> Unit) {
+        return removeItem(index = index, notifyDataSetChanged = true, commitCallback = commitCallback)
+    }
+
+    override fun removeItem(index: Int, notifyDataSetChanged: Boolean, commitCallback : (Boolean)-> Unit) {
+        val newList = getOrCreatePendingList()
+        if (newList.isNotEmpty()) {
+            newList.removeAt(index)
+            if (notifyDataSetChanged) {
+                submitList(newList) {
+                    commitCallback(true)
+                }
+                clearPendingItems()
+            }
+
+        } else {
+            commitCallback(false)
+        }
+    }
+
+
 
     override fun replaceItem(index: Int, item: Any) {
         replaceItem(index, item, true)
     }
 
     override fun replaceItem(index: Int, item: Any, notifyDataSetChanged: Boolean) {
-        this.items[index] = item
-        if (notifyDataSetChanged) {
-            smartNotifyItemChanged(index)
+        val newList = getOrCreatePendingList()
+        if (index in newList.indices) {
+            newList[index] = item
+            if (notifyDataSetChanged) {
+                commitPendingItems()
+            }
         }
     }
 
     override fun clear() {
-        this.items.clear()
-        smartNotifyDataSetChanged()
+        submitList(emptyList())
+        clearPendingItems()
     }
 
-    override fun smartNotifyDataSetChanged() {
-        updateItemCount()
-        notifyDataSetChanged()
-    }
-
-    override fun smartNotifyItemChanged(position: Position) {
-        updateItemCount()
-        notifyItemChanged(position)
-    }
-
-    override fun smartNotifyItemRangeChanged(positionStart: Int, itemCount: Int) {
-        updateItemCount()
-        notifyItemRangeChanged(positionStart, itemCount)
-    }
-
-    override fun smartNotifyItemInserted(position: Position) {
-        updateItemCount()
-        notifyItemInserted(position)
-    }
-
-    override fun smartNotifyItemRangeInserted(positionStart: Int, itemCount: Int) {
-        updateItemCount()
-        notifyItemRangeInserted(positionStart, itemCount)
-    }
-
-    override fun smartNotifyItemRemoved(position: Position) {
-        updateItemCount()
-        notifyItemRemoved(position)
-    }
-
-    override fun smartNotifyItemRangeRemoved(positionStart: Int, itemCount: Int) {
-        updateItemCount()
-        notifyItemRangeRemoved(positionStart, itemCount)
-    }
-
-    final override fun updateItemCount() {
-        smartItemCount = items.size
+    override fun updateItemCount() {
+        smartItemCount = currentList.size
     }
 
     override fun map(itemType: ItemType, viewHolderType: SmartViewHolderType) {
@@ -330,8 +413,7 @@ open class SmartRecyclerAdapter
 
     override fun add(extension: SmartExtensionIdentifier) {
         (extension as? SmartRecyclerAdapterBinder)?.bind(this)
-        if (extension.identifier != extension::class
-            && !smartExtensions.containsKey(extension.identifier)) {
+        if (extension.identifier != extension::class && !smartExtensions.containsKey(extension.identifier)) {
             smartExtensions[extension.identifier] = extension
         } else if (smartExtensions.containsKey(extension.identifier)) {
             Log.e("SmartAdapterBuilder", "SmartAdapterBuilder already contains the key '${extension.identifier}', please consider override the identifier to be able to fetch the extension easily")
@@ -339,21 +421,6 @@ open class SmartRecyclerAdapter
         } else {
             smartExtensions[extension.identifier] = extension
         }
-    }
-
-    companion object {
-
-        /**
-         * Builder of [SmartRecyclerAdapter] for easy implementation.
-         * @return SmartAdapterBuilder
-         */
-        fun items(items: List<Any>): SmartAdapterBuilder = SmartAdapterBuilder().setItems(items)
-
-        /**
-         * Builder of [SmartRecyclerAdapter] for easy implementation.
-         * @return SmartAdapterBuilder
-         */
-        fun empty(): SmartAdapterBuilder = SmartAdapterBuilder()
     }
 }
 

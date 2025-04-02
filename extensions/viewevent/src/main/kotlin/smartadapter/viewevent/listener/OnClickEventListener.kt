@@ -36,7 +36,7 @@ open class OnClickEventListener(
                     val event = ViewEvent.OnClick(
                         adapter,
                         viewHolder,
-                        viewHolder.adapterPosition,
+                        viewHolder.bindingAdapterPosition,
                         view
                     )
                     (viewHolder as? OnItemClickEventListener)?.let {

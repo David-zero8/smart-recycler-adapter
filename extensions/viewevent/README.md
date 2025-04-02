@@ -30,7 +30,7 @@ open class OnClickEventListener(
         viewIds.forEach {
             with(findView(it, viewHolder)) {
                 setOnClickListener { view ->
-                    val event = ViewEvent.OnClick(adapter, viewHolder, viewHolder.adapterPosition, view)
+                    val event = ViewEvent.OnClick(adapter, viewHolder, viewHolder.bindingAdapterPosition, view)
                     (viewHolder as? OnItemClickEventListener)?.let {
                         viewHolder.onViewEvent(event)
                     }

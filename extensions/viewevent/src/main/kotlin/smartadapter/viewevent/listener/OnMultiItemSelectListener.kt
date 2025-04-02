@@ -57,7 +57,6 @@ open class OnSingleItemCheckListener(
      */
     override fun disable(position: Position) {
         super.disable(position)
-        smartRecyclerAdapter.smartNotifyItemChanged(position)
     }
 }
 
@@ -93,7 +92,6 @@ open class OnSingleItemSelectListener(
      */
     override fun disable(position: Position) {
         super.disable(position)
-        smartRecyclerAdapter.smartNotifyItemChanged(position)
     }
 }
 
@@ -121,14 +119,14 @@ open class OnMultiItemCheckListener(
 
         with(view) {
             setOnClickListener {
-                toggle(viewHolder.adapterPosition)
+                toggle(viewHolder.bindingAdapterPosition)
                 eventListener.invoke(
                     ViewEvent.OnItemSelected(
                         adapter,
                         viewHolder,
-                        viewHolder.adapterPosition,
+                        viewHolder.bindingAdapterPosition,
                         view,
-                        isSelected(viewHolder.adapterPosition)
+                        isSelected(viewHolder.bindingAdapterPosition)
                     )
                 )
             }
@@ -140,7 +138,7 @@ open class OnMultiItemCheckListener(
         viewHolder: SmartViewHolder<Any>
     ) {
         val view = viewHolder.itemView.findViewById<CompoundButton>(viewId)
-        view.isChecked = isSelected(viewHolder.adapterPosition)
+        view.isChecked = isSelected(viewHolder.bindingAdapterPosition)
     }
 }
 
@@ -189,7 +187,6 @@ open class OnMultiItemSelectListener(
         smartRecyclerAdapter.getItems().forEachIndexed { index, item ->
             if (selectableItemType.isInstance(item)) {
                 enable(index)
-                smartRecyclerAdapter.smartNotifyItemChanged(index)
             }
         }
     }
@@ -201,7 +198,6 @@ open class OnMultiItemSelectListener(
     override fun disableAll() {
         selectedItems.toIntArray().forEach { position ->
             disable(position)
-            smartRecyclerAdapter.smartNotifyItemChanged(position)
         }
     }
 
@@ -235,9 +231,14 @@ open class OnMultiItemSelectListener(
      */
     fun removeSelections() {
         for (position in selectedItems.descendingSet()) {
-            smartRecyclerAdapter.removeItem(position)
+            smartRecyclerAdapter.removeItem(position, notifyDataSetChanged = false) {
+
+            }
         }
-        selectedItems.clear()
+        smartRecyclerAdapter.commitPendingItems() {
+            selectedItems.clear()
+        }
+
     }
 
     override fun onCreateViewHolder(
@@ -251,16 +252,15 @@ open class OnMultiItemSelectListener(
         with(view) {
             if (enableOnLongClick) {
                 setOnLongClickListener {
-                    toggle(viewHolder.adapterPosition)
+                    toggle(viewHolder.bindingAdapterPosition)
                     setSelected(adapter, viewHolder)
-                    smartRecyclerAdapter.smartNotifyItemChanged(viewHolder.adapterPosition)
                     eventListener.invoke(
                         ViewEvent.OnItemSelected(
                             adapter,
                             viewHolder,
-                            viewHolder.adapterPosition,
+                            viewHolder.bindingAdapterPosition,
                             view,
-                            isSelected(viewHolder.adapterPosition)
+                            isSelected(viewHolder.bindingAdapterPosition)
                         )
                     )
                     true
@@ -271,16 +271,15 @@ open class OnMultiItemSelectListener(
                     || enableOnLongClick
                     && selectedItemsCount > 0
                 ) {
-                    toggle(viewHolder.adapterPosition)
+                    toggle(viewHolder.bindingAdapterPosition)
                     setSelected(adapter, viewHolder)
-                    smartRecyclerAdapter.smartNotifyItemChanged(viewHolder.adapterPosition)
                     eventListener.invoke(
                         ViewEvent.OnItemSelected(
                             adapter,
                             viewHolder,
-                            viewHolder.adapterPosition,
+                            viewHolder.bindingAdapterPosition,
                             view,
-                            isSelected(viewHolder.adapterPosition)
+                            isSelected(viewHolder.bindingAdapterPosition)
                         )
                     )
                 } else {
@@ -288,7 +287,7 @@ open class OnMultiItemSelectListener(
                         ViewEvent.OnClick(
                             adapter,
                             viewHolder,
-                            viewHolder.adapterPosition,
+                            viewHolder.bindingAdapterPosition,
                             view
                         )
                     )
@@ -310,13 +309,13 @@ open class OnMultiItemSelectListener(
                 ViewEvent.OnItemSelected(
                     adapter,
                     viewHolder,
-                    viewHolder.adapterPosition,
+                    viewHolder.bindingAdapterPosition,
                     viewHolder.itemView,
-                    isSelected(viewHolder.adapterPosition)
+                    isSelected(viewHolder.bindingAdapterPosition)
                 )
             )
         } else {
-            if (isSelected(viewHolder.adapterPosition)) {
+            if (isSelected(viewHolder.bindingAdapterPosition)) {
                 viewHolder.itemView.setBackgroundColor(Color.RED)
             } else {
                 viewHolder.itemView.setBackgroundAttribute(android.R.attr.selectableItemBackground)
