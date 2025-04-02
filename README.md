@@ -48,10 +48,10 @@ This library will make it easy and painless to map your data item with a target 
 
 #### Release overview
 
-* Extension libraries (ViewEvent, DiffUtil, NestedAdapter, StickyHeader, Filter) [v5.0.0-rc01](https://github.com/manneohlund/smart-recycler-adapter/tree/v5.0.0-rc01)
-* Kotlin + AndroidX (jcenter, jitpack) [v4.0.0](https://github.com/manneohlund/smart-recycler-adapter/tree/4.0.0)
-* Java + AndroidX (jcenter, jitpack) [v3.0.0](https://github.com/manneohlund/smart-recycler-adapter/tree/3.0.0)
-* Java + AppCompat (jitpack) [v2.2.0](https://github.com/manneohlund/smart-recycler-adapter/tree/2.2.0)
+* Migrated `RecyclerView.Adapter` to `ListAdapter` for improved performance and efficient updates.
+* Applied Android DataBinding in all ViewHolder implementations for cleaner, boilerplate-free code.
+
+* Extension libraries (ViewEvent, DiffUtil, NestedAdapter, StickyHeader, Filter) [v1.0.0](https://github.com/David-zero8/smart-recycler-adapter)
 
 # Gradle
 Add the following repository configuration to your `settings.gradle` or top-level `build.gradle`:
@@ -67,7 +67,7 @@ repositories {
 ```groovy
 dependencies {
   // Core SmartRecyclerAdapter
-  implementation 'com.github.David-zero8:smart-recycler-adapter:1.0.6'
+  implementation 'com.github.David-zero8:smart-recycler-adapter:1.0.11'
 }
 ```
 
@@ -76,13 +76,13 @@ dependencies {
 ```groovy
 dependencies {
   // ViewEvent click listeners, multi select, swipe dismiss and drag & drop
-  implementation 'com.github.David-zero8:smart-recycler-adapter-viewevent:1.0.0'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-viewevent:1.0.11'
   // Nested adapter extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-nestedadapter:1.0.0'  
+  implementation 'com.github.David-zero8:smart-recycler-adapter-nestedadapter:1.0.11'  
   // Sticky header extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-stickyheader:1.0.0'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-stickyheader:1.0.11'
   // Filter extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-filter:1.0.0'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-filter:1.0.11'
 }
 ```
 
