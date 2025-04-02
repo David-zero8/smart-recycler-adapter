@@ -1,4 +1,4 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.zero8.smartrecycleradapter.nestedadapter">
+    package="io.github.zero8.smartrecycleradapter.filter">
 
 </manifest>
