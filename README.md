@@ -54,13 +54,20 @@ This library will make it easy and painless to map your data item with a target 
 * Java + AppCompat (jitpack) [v2.2.0](https://github.com/manneohlund/smart-recycler-adapter/tree/2.2.0)
 
 # Gradle
-Add `jcenter()` or `maven { url  "https://dl.bintray.com/manneohlund/maven" }` to your `build.gradle` under `repositories`
+Add the following repository configuration to your `settings.gradle` or top-level `build.gradle`:
+
+```gradle
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+```
 
 **Core**
 ```groovy
 dependencies {
   // Core SmartRecyclerAdapter
-  implementation 'io.github.manneohlund:smart-recycler-adapter:5.0.0-rc01'
+  implementation 'com.github.David-zero8:smart-recycler-adapter:1.0.6'
 }
 ```
 
@@ -69,15 +76,13 @@ dependencies {
 ```groovy
 dependencies {
   // ViewEvent click listeners, multi select, swipe dismiss and drag & drop
-  implementation 'io.github.manneohlund:smart-recycler-adapter-viewevent:1.0.0-beta03'
-  // DiffUtil extension library
-  implementation 'io.github.manneohlund:smart-recycler-adapter-diffutil:1.0.0-beta01'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-viewevent:1.0.0'
   // Nested adapter extension library
-  implementation 'io.github.manneohlund:smart-recycler-adapter-nestedadapter:1.0.0-beta01'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-nestedadapter:1.0.0'  
   // Sticky header extension library
-  implementation 'io.github.manneohlund:smart-recycler-adapter-stickyheader:1.0.0-alpha02'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-stickyheader:1.0.0'
   // Filter extension library
-  implementation 'io.github.manneohlund:smart-recycler-adapter-filter:1.0.0-alpha01'
+  implementation 'com.github.David-zero8:smart-recycler-adapter-filter:1.0.0'
 }
 ```
 
