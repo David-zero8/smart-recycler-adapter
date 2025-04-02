@@ -59,3 +59,13 @@ tasks.register('jitpackBuild') {
             ':extensions:stickyheader:assembleRelease',
             ':extensions:filter:assembleRelease')
 }
+
+tasks.register('jitpackPublish') {
+    dependsOn(
+            ':smartadapter:publishReleasePublicationToMavenLocal',
+            ':extensions:viewevent:publishReleasePublicationToMavenLocal',
+            ':extensions:nestedadapter:publishReleasePublicationToMavenLocal',
+            ':extensions:stickyheader:publishReleasePublicationToMavenLocal',
+            ':extensions:filter:publishReleasePublicationToMavenLocal'
+    )
+}
