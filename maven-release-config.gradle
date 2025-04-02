@@ -10,12 +10,12 @@ ext {
     LIBRARY_DESCRIPTION = LIB_DESCRIPTION
 
     SITE_URL = 'https://manneohlund.github.io/smart-recycler-adapter'
-    GIT_URL = 'https://github.com/manneohlund/smart-recycler-adapter'
-    ISSUE_URL = 'https://github.com/manneohlund/smart-recycler-adapter/issues'
+    GIT_URL = 'https://github.com/David-zero8/smart-recycler-adapter'
+    ISSUE_URL = 'https://github.com/David-zero8/smart-recycler-adapter/issues'
 
-    DEVELOPER_ID = 'manneohlund'
-    DEVELOPER_NAME = 'Manne Öhlund'
-    DEVELOPER_EMAIL = 'manne.ohlund@gmail.com'
+    DEVELOPER_ID = 'David-zero8'
+    DEVELOPER_NAME = 'david.park'
+    DEVELOPER_EMAIL = 'ai.david.park@gmail.com'
 
     LICENSE_NAME = 'The Apache Software License, Version 2.0'
     LICENSE_URL = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
