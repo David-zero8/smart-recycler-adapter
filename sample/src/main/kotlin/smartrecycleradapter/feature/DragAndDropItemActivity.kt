@@ -1,10 +1,10 @@
 package smartrecycleradapter.feature
 
 import android.os.Bundle
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnLongClickEventListener
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.dragdrop.AutoDragAndDropBinder
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnLongClickEventListener
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 

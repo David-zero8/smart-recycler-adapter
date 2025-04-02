@@ -12,11 +12,11 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import androidx.activity.viewModels
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.stickyheader.StickyHeaderItemDecorationExtension
-import smartadapter.viewevent.listener.OnMultiItemSelectListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewmodel.ViewEventViewModel
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.stickyheader.StickyHeaderItemDecorationExtension
+import smartrecycleradapter.viewevent.listener.OnMultiItemSelectListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewmodel.ViewEventViewModel
 import smartrecycleradapter.feature.simpleitem.SimpleHeaderViewHolder
 import smartrecycleradapter.utils.showToast
 

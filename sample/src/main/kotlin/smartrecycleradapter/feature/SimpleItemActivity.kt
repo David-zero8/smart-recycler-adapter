@@ -1,7 +1,7 @@
 package smartrecycleradapter.feature
 
 import android.os.Bundle
-import smartadapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 
 /*

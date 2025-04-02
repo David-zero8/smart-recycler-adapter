@@ -8,23 +8,19 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.CompoundButton
 import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.Position
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.SmartViewHolderType
-import smartadapter.ViewId
-import smartadapter.extension.findView
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnMultiItemCheckListener
-import smartadapter.viewevent.listener.OnMultiItemSelectListener
-import smartadapter.viewevent.listener.OnSingleItemCheckListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.Position
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.SmartViewHolderType
+import io.github.zero8.smartrecycleradapter.ViewId
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
+import smartrecycleradapter.viewevent.listener.OnMultiItemCheckListener
+import smartrecycleradapter.viewevent.listener.OnMultiItemSelectListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewmodel.ViewEventViewModel
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableRadioButtonViewHolder
 import kotlin.reflect.KClass
@@ -137,7 +133,7 @@ open class OnSingleRadioButtonCheckListener(
     }
 
     /**
-     * Removes the position from the data set and calls [smartadapter.SmartRecyclerAdapter.smartNotifyItemChanged].
+     * Removes the position from the data set and calls [SmartRecyclerAdapter.smartNotifyItemChanged].
      * @param position the adapter position
      */
     override fun disable(position: Position) {

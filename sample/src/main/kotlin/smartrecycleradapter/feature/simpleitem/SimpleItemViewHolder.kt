@@ -3,7 +3,7 @@ package smartrecycleradapter.feature.simpleitem
 import android.view.ViewGroup
 import android.widget.TextView
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
 
 /*
  * Created by Manne Öhlund on 2019-08-04.

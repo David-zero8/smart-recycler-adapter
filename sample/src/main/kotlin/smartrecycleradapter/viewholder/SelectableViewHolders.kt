@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import io.github.zero8.smartrecycleradapter.sample.R
 import io.github.zero8.smartrecycleradapter.sample.databinding.SimpleRadiobuttonItemBinding
-import smartadapter.viewholder.BindingSmartViewHolder
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.BindingSmartViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
 import smartrecycleradapter.feature.CheckItem
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 

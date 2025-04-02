@@ -3,12 +3,12 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Toast
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnLongClickEventListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewholder.OnItemClickEventListener
-import smartadapter.viewevent.viewholder.OnItemLongClickEventListener
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnLongClickEventListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewholder.OnItemClickEventListener
+import smartrecycleradapter.viewevent.viewholder.OnItemLongClickEventListener
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 

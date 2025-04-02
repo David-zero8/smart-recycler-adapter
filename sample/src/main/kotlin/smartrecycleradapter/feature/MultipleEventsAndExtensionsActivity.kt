@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnLongClickEventListener
-import smartadapter.viewevent.swipe.AutoRemoveItemSwipeEventBinder
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.dragdrop.AutoDragAndDropBinder
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnLongClickEventListener
+import smartrecycleradapter.viewevent.swipe.AutoRemoveItemSwipeEventBinder
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 

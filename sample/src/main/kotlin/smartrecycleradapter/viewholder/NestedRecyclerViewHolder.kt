@@ -10,8 +10,8 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.github.zero8.smartrecycleradapter.sample.databinding.NestedRecyclerViewBinding
-import smartadapter.nestedadapter.SmartNestedRecyclerViewHolder
-import smartadapter.viewholder.BindingSmartViewHolder
+import io.github.zero8.smartrecycleradapter.nestedadapter.SmartNestedRecyclerViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.BindingSmartViewHolder
 import smartrecycleradapter.models.MovieCategory
 
 open class NestedRecyclerViewHolder(parentView: ViewGroup) :

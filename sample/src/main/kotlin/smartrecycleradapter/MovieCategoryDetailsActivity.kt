@@ -1,17 +1,16 @@
 package smartrecycleradapter
 
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import io.github.zero8.smartrecycleradapter.Position
+import io.github.zero8.smartrecycleradapter.SmartEndlessScrollRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
 import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityMovieCategoryDetailsBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import smartadapter.Position
-import smartadapter.SmartEndlessScrollRecyclerAdapter
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
 import smartrecycleradapter.extension.GridAutoLayoutManager
 import smartrecycleradapter.models.MovieData
 import smartrecycleradapter.models.MovieModel

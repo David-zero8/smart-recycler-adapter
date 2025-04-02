@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
-import smartadapter.Position
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
-import smartadapter.viewevent.listener.OnClickEventListener
+import io.github.zero8.smartrecycleradapter.Position
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.dragdrop.AutoDragAndDropBinder
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
 import smartrecycleradapter.extension.GridAutoLayoutManager
 import smartrecycleradapter.models.MovieData
 import smartrecycleradapter.models.MovieModel

@@ -10,10 +10,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnMultiItemSelectListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewmodel.ViewEventViewModel
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.listener.OnMultiItemSelectListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewmodel.ViewEventViewModel
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableItemViewHolder
 

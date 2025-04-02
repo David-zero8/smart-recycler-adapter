@@ -11,11 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
 import io.github.zero8.smartrecycleradapter.sample.databinding.ActivityFilterItemBinding
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.filter.FilterExtension
-import smartadapter.get
-import smartadapter.internal.extension.submitListWithLoading
-import smartadapter.viewevent.listener.OnClickEventListener
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.filter.FilterExtension
+import io.github.zero8.smartrecycleradapter.get
+import io.github.zero8.smartrecycleradapter.internal.extension.submitListWithLoading
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SmallHeaderViewHolder

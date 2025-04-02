@@ -8,8 +8,8 @@ package smartrecycleradapter.feature
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MotionEvent
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.stickyheader.StickyHeaderItemDecorationExtension
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.stickyheader.StickyHeaderItemDecorationExtension
 import smartrecycleradapter.feature.simpleitem.SimpleHeaderViewHolder
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast

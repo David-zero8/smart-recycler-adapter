@@ -1,7 +1,7 @@
 package smartrecycleradapter.models
 
 import com.google.gson.annotations.SerializedName
-import smartadapter.nestedadapter.SmartNestedItem
+import io.github.zero8.smartrecycleradapter.nestedadapter.SmartNestedItem
 
 /*
  * Created by Manne Öhlund on 2019-06-22.

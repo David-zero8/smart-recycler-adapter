@@ -12,13 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.Position
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnCustomViewEventListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewholder.CustomViewEventListenerHolder
-import smartadapter.viewholder.SmartAdapterHolder
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.Position
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.viewholder.SmartAdapterHolder
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
+import smartrecycleradapter.viewevent.listener.OnCustomViewEventListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewholder.CustomViewEventListenerHolder
 import smartrecycleradapter.utils.showToast
 
 @SuppressLint("ClickableViewAccessibility")

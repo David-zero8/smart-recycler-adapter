@@ -13,13 +13,13 @@ import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
+import io.github.zero8.smartrecycleradapter.Position
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import smartadapter.Position
-import smartadapter.SmartRecyclerAdapter
 import smartrecycleradapter.models.CopyrightModel
 import smartrecycleradapter.models.MovieCategory
 import smartrecycleradapter.viewholder.ActionMoviesViewHolder

@@ -12,7 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
 import smartrecycleradapter.models.MovieModel
 
 private val requestOption = RequestOptions()

@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.dragdrop.AutoDragAndDropBinder
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnLongClickEventListener
-import smartadapter.viewholder.DraggableViewHolder
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.viewholder.DraggableViewHolder
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
+import smartrecycleradapter.viewevent.dragdrop.AutoDragAndDropBinder
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnLongClickEventListener
 import smartrecycleradapter.utils.showToast
 
 /*

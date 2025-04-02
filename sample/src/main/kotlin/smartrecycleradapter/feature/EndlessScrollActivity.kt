@@ -8,7 +8,7 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartEndlessScrollRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.SmartEndlessScrollRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.runDelayed
 import smartrecycleradapter.utils.showToast

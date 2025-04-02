@@ -5,7 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import kotlin.random.Random.Default.nextInt
 

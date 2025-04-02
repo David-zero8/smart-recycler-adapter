@@ -8,11 +8,11 @@ package smartrecycleradapter.feature
 import android.os.Bundle
 import androidx.activity.viewModels
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.listener.OnMultiItemCheckListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewmodel.ViewEventViewModel
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.listener.OnMultiItemCheckListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewmodel.ViewEventViewModel
 import smartrecycleradapter.utils.showToast
 import smartrecycleradapter.viewholder.SimpleSelectableSwitchViewHolder
 

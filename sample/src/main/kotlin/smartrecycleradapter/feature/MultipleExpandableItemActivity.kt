@@ -14,12 +14,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.viewevent.listener.OnMultiItemSelectListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.viewholder.OnItemSelectedEventListener
-import smartadapter.viewevent.viewmodel.ViewEventViewModel
-import smartadapter.viewholder.SmartViewHolder
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
+import smartrecycleradapter.viewevent.listener.OnMultiItemSelectListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.viewholder.OnItemSelectedEventListener
+import smartrecycleradapter.viewevent.viewmodel.ViewEventViewModel
 
 class MultipleExpandableItemActivity : BaseSampleActivity() {
 

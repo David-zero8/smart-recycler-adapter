@@ -8,12 +8,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import io.github.zero8.smartrecycleradapter.sample.R
-import smartadapter.SmartRecyclerAdapter
-import smartadapter.extension.SmartViewHolderBinder
-import smartadapter.viewevent.listener.OnClickEventListener
-import smartadapter.viewevent.model.ViewEvent
-import smartadapter.viewevent.swipe.BasicSwipeEventBinder
-import smartadapter.viewevent.swipe.SwipeFlags
+import io.github.zero8.smartrecycleradapter.SmartRecyclerAdapter
+import smartrecycleradapter.extension.SmartViewHolderBinder
+import smartrecycleradapter.viewevent.listener.OnClickEventListener
+import smartrecycleradapter.viewevent.model.ViewEvent
+import smartrecycleradapter.viewevent.swipe.BasicSwipeEventBinder
+import smartrecycleradapter.viewevent.swipe.SwipeFlags
 import smartrecycleradapter.feature.simpleitem.SimpleItemViewHolder
 import smartrecycleradapter.utils.showToast
 
