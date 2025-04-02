@@ -52,7 +52,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-tasks.register('assembleAllModules') {
+tasks.register('jitpackBuild') {
     dependsOn(':smartadapter:assembleRelease',
             ':extensions:viewevent:assembleRelease',
             ':extensions:nestedadapter:assembleRelease',
