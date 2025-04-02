@@ -16,9 +16,6 @@ apply from: '../../common-library-config.gradle'
 android {
     namespace "io.github.zero8.smartrecycleradapter.stickyheader"
 }
+apply from: '../../maven-local-publish.gradle'
+apply from: '../../maven-release-config.gradle'
 
-if (project.rootProject.file('local.properties').exists()) {
-    apply from: '../../maven-local-publish.gradle'
-    apply from: '../../maven-release-config.gradle'
-//    apply from: '../../maven-release-script.gradle'
-}

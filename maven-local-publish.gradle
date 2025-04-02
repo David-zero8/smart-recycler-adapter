@@ -1,5 +1,19 @@
 apply plugin: 'maven-publish'
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                artifactId = LIB_ARTIFACT_ID
+                groupId = PROJ_GROUP_ID
+                version = LIB_VERSION_NAME
+            }
+        }
+    }
+}
+
 //task sourcesJar(type: Jar) {
 //    archiveClassifier.set('sources')
 //    from android.sourceSets.main.java.srcDirs
