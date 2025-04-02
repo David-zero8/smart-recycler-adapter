@@ -7,7 +7,7 @@ ext {
     LIB_ARTIFACT_NAME = 'SmartRecyclerAdapter ViewEvent'
     LIB_ARTIFACT_ID = 'smart-recycler-adapter-viewevent'
     LIB_VERSION_CODE = 5
-    LIB_VERSION_NAME = '1.0.0-beta03'
+    LIB_VERSION_NAME = '1.0.0'
     LIB_DESCRIPTION = 'View Event listeners extension library for SmartRecyclerAdapter'
 }
 

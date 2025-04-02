@@ -7,7 +7,7 @@ ext {
     LIB_ARTIFACT_NAME = 'SmartRecyclerAdapter Filter'
     LIB_ARTIFACT_ID = 'smart-recycler-adapter-filter'
     LIB_VERSION_CODE = 1
-    LIB_VERSION_NAME = '1.0.0-alpha01'
+    LIB_VERSION_NAME = '1.0.0'
     LIB_DESCRIPTION = 'Filter extension library for SmartRecyclerAdapter'
 }
 

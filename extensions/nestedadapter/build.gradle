@@ -7,7 +7,7 @@ ext {
     LIB_ARTIFACT_NAME = 'SmartRecyclerAdapter NestedAdapter'
     LIB_ARTIFACT_ID = 'smart-recycler-adapter-nestedadapter'
     LIB_VERSION_CODE = 2
-    LIB_VERSION_NAME = '1.0.0-beta01'
+    LIB_VERSION_NAME = '1.0.0'
     LIB_DESCRIPTION = 'Nested Adapter extension library for SmartRecyclerAdapter'
 }
 
