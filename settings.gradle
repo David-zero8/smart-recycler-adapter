@@ -1,5 +1,14 @@
-include ':extensions:filter'
-include ':extensions:stickyheader'
-include ':extensions:nestedadapter'
-include ':extensions:viewevent'
-include ':sample', ':smartadapter'
+if (System.env.JITPACK == "true") {
+    include ':smartadapter'
+    include ':extensions:viewevent'
+    include ':extensions:nestedadapter'
+    include ':extensions:stickyheader'
+    include ':extensions:filter'
+} else {
+    include ':smartadapter'
+    include ':extensions:viewevent'
+    include ':extensions:nestedadapter'
+    include ':extensions:stickyheader'
+    include ':extensions:filter'
+    include ':sample'
+}
