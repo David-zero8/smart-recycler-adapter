@@ -28,5 +28,5 @@ dependencies {
 if (project.rootProject.file('local.properties').exists()) {
     apply from: '../../maven-local-publish.gradle'
     apply from: '../../maven-release-config.gradle'
-    apply from: '../../maven-release-script.gradle'
+//    apply from: '../../maven-release-script.gradle'
 }
