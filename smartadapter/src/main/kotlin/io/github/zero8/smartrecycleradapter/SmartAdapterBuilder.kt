@@ -59,7 +59,7 @@ open class SmartAdapterBuilder {
         return this
     }
 
-    fun setDiffCallback(diffCallback: DiffUtil.ItemCallback<Any>): SmartAdapterBuilder {
+    open fun setDiffCallback(diffCallback: DiffUtil.ItemCallback<Any>): SmartAdapterBuilder {
         this.diffCallback = diffCallback
         return this
     }
