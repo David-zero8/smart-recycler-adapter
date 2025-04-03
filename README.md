@@ -67,21 +67,6 @@ dependencies {
 }
 ```
 
-**Extensions**
-
-```groovy
-dependencies {
-  // ViewEvent click listeners, multi select, swipe dismiss and drag & drop
-  implementation 'com.github.David-zero8:smart-recycler-adapter-viewevent:1.0.11'
-  // Nested adapter extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-nestedadapter:1.0.11'  
-  // Sticky header extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-stickyheader:1.0.11'
-  // Filter extension library
-  implementation 'com.github.David-zero8:smart-recycler-adapter-filter:1.0.11'
-}
-```
-
 # Basic
 
 ### Basic adapter creation
