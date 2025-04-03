@@ -1,10 +1,6 @@
 
 # smart-recycler-adapter
 
-[![Download](https://api.bintray.com/packages/manneohlund/maven/smart-recycler-adapter/images/download.svg)](https://bintray.com/manneohlund/maven/smart-recycler-adapter/_latestVersion)
-[![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-SmartRecyclerAdapter-green.svg?style=flat )]( https://android-arsenal.com/details/1/7766)
-[![Build Status](https://travis-ci.com/manneohlund/smart-recycler-adapter.svg?branch=master)](https://travis-ci.com/manneohlund/smart-recycler-adapter)
-
 Never code any boilerplate RecyclerAdapter again!
 This library will make it easy and painless to map your data item with a target ViewHolder.
 
@@ -13,38 +9,38 @@ This library will make it easy and painless to map your data item with a target 
 # Features
 
 ###### OnViewEventListener
-* Smart <b>OnClick</b> / <b>OnLongClickListener</b>  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleItemOnClickOnLongClickActivity.kt" target="_blank">SimpleItemOnClickOnLongClickActivity</a></sup>
-* State holding with <b>OnItemSelectedListener</b>  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleViewTypesResolverActivity.kt" target="_blank">MultipleViewTypesResolverActivity</a></sup>
-* Custom View Events  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/CustomViewEventActivity.kt" target="_blank">CustomViewEventActivity</a></sup>
+* Smart <b>OnClick</b> / <b>OnLongClickListener</b>  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleItemOnClickOnLongClickActivity.kt" target="_blank">SimpleItemOnClickOnLongClickActivity</a></sup>
+* State holding with <b>OnItemSelectedListener</b>  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleViewTypesResolverActivity.kt" target="_blank">MultipleViewTypesResolverActivity</a></sup>
+* Custom View Events  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/CustomViewEventActivity.kt" target="_blank">CustomViewEventActivity</a></sup>
 ###### ItemTouchHelper Swipe, Drag & Drop extensions
-* Drag & drop  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/DragAndDropItemActivity.kt" target="_blank">DragAndDropItemActivity</a></sup>
-* Drag & drop with handle  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/DragAndDropHandleItemActivity.kt" target="_blank">DragAndDropHandleItemActivity</a></sup>
-* Swipe to remove item  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SwipeRemoveItemActivity.kt" target="_blank">SwipeRemoveItemActivity</a></sup>
-* Drag & drop, Swipe, View Events  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleEventsAndExtensionsActivity.kt" target="_blank">MultipleEventsAndExtensionsActivity</a></sup>
-* Grid + Drag & drop  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/GridActivity.kt" target="_blank">GridActivity</a></sup>
+* Drag & drop  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/DragAndDropItemActivity.kt" target="_blank">DragAndDropItemActivity</a></sup>
+* Drag & drop with handle  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/DragAndDropHandleItemActivity.kt" target="_blank">DragAndDropHandleItemActivity</a></sup>
+* Swipe to remove item  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SwipeRemoveItemActivity.kt" target="_blank">SwipeRemoveItemActivity</a></sup>
+* Drag & drop, Swipe, View Events  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleEventsAndExtensionsActivity.kt" target="_blank">MultipleEventsAndExtensionsActivity</a></sup>
+* Grid + Drag & drop  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/GridActivity.kt" target="_blank">GridActivity</a></sup>
 ###### ViewTypeResolver
-* Multiple ViewHolder types resolver  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleViewTypesResolverActivity.kt" target="_blank">MultipleViewTypesResolverActivity</a></sup>
+* Multiple ViewHolder types resolver  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleViewTypesResolverActivity.kt" target="_blank">MultipleViewTypesResolverActivity</a></sup>
 ###### SmartStateHolder
-* Multiple items select  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectItemsActivity.kt" target="_blank">MultiSelectItemsActivity</a></sup>
-* Single RadioButton select  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SingleSelectRadioButtonItemActivity.kt" target="_blank">SingleSelectRadioButtonItemActivity</a></sup>
-* Multiple CheckBox select  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectCheckBoxItemsActivity.kt" target="_blank">MultiSelectCheckBoxItemsActivity</a></sup>
-* Multiple Switch select  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectSwitchItemsActivity.kt" target="_blank">MultiSelectSwitchItemsActivity</a></sup>
-* Multiple Expandable items  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleExpandableItemActivity.kt" target="_blank">MultipleExpandableItemActivity</a></sup>
-* Single Expandable item  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SingleExpandableItemActivity.kt" target="_blank">SingleExpandableItemActivity</a></sup>
+* Multiple items select  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectItemsActivity.kt" target="_blank">MultiSelectItemsActivity</a></sup>
+* Single RadioButton select  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SingleSelectRadioButtonItemActivity.kt" target="_blank">SingleSelectRadioButtonItemActivity</a></sup>
+* Multiple CheckBox select  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectCheckBoxItemsActivity.kt" target="_blank">MultiSelectCheckBoxItemsActivity</a></sup>
+* Multiple Switch select  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultiSelectSwitchItemsActivity.kt" target="_blank">MultiSelectSwitchItemsActivity</a></sup>
+* Multiple Expandable items  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleExpandableItemActivity.kt" target="_blank">MultipleExpandableItemActivity</a></sup>
+* Single Expandable item  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SingleExpandableItemActivity.kt" target="_blank">SingleExpandableItemActivity</a></sup>
 ###### Sticky header
-* Simple sticky header  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/StickyHeaderActivity.kt" target="_blank">StickyHeaderActivity</a></sup>
-* Multiple expandable items + sticky header  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleExpandableItemHeaderActivity.kt" target="_blank">MultipleExpandableItemHeaderActivity</a></sup>
+* Simple sticky header  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/StickyHeaderActivity.kt" target="_blank">StickyHeaderActivity</a></sup>
+* Multiple expandable items + sticky header  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/MultipleExpandableItemHeaderActivity.kt" target="_blank">MultipleExpandableItemHeaderActivity</a></sup>
 ###### Nested adapter
-* Nested SmartRecyclerAdapter  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/NestedSmartRecyclerAdaptersActivity.kt" target="_blank">NestedSmartRecyclerAdaptersActivity</a></sup>
+* Nested SmartRecyclerAdapter  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/NestedSmartRecyclerAdaptersActivity.kt" target="_blank">NestedSmartRecyclerAdaptersActivity</a></sup>
 ###### Pagination
-* Endless scroll  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/EndlessScrollActivity.kt" target="_blank">EndlessScrollActivity</a></sup>
-* Endless scroll with load more button  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/EndlessScrollLoadMoreButtonActivity.kt" target="_blank">EndlessScrollLoadMoreButtonActivity</a></sup>
+* Endless scroll  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/EndlessScrollActivity.kt" target="_blank">EndlessScrollActivity</a></sup>
+* Endless scroll with load more button  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/EndlessScrollLoadMoreButtonActivity.kt" target="_blank">EndlessScrollLoadMoreButtonActivity</a></sup>
 ###### DiffUtil
-* Diff Util extension  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/DiffUtilActivity.kt" target="_blank">DiffUtilActivity</a></sup>
+* Diff Util extension  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/DiffUtilActivity.kt" target="_blank">DiffUtilActivity</a></sup>
 ###### Filter
-* SimpleFilterActivity  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleFilterActivity.kt" target="_blank">SimpleFilterActivity</a></sup>
-* SimpleFilterDiffSwapActivity  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleFilterDiffSwapActivity.kt" target="_blank">SimpleFilterDiffSwapActivity</a></sup>
-* FilterGridActivity  <sup><a href="https://github.com/manneohlund/smart-recycler-adapter/blob/v5.0.0-rc01/sample/src/main/kotlin/smartrecycleradapter/feature/FilterGridActivity.kt" target="_blank">FilterGridActivity</a></sup>
+* SimpleFilterActivity  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleFilterActivity.kt" target="_blank">SimpleFilterActivity</a></sup>
+* SimpleFilterDiffSwapActivity  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/SimpleFilterDiffSwapActivity.kt" target="_blank">SimpleFilterDiffSwapActivity</a></sup>
+* FilterGridActivity  <sup><a href="https://github.com/David-zero8/smart-recycler-adapter/blob/master/sample/src/main/kotlin/smartrecycleradapter/feature/FilterGridActivity.kt" target="_blank">FilterGridActivity</a></sup>
 
 #### Release overview
 
@@ -324,37 +320,6 @@ SmartRecyclerAdapter
 
 **See sample app section:** [#Sticky header](#sticky-header)
 
-# smart-recycler-adapter-diffutil
-
-As of `smart-recycler-adapter:v5.0.0` diff util have been removed from `SmartRecyclerAdapter` and is added in this extension library `smart-recycler-adapter-diffutil`.
-
-Essentially the `SmartRecyclerAdapter` will now hold a map of `SmartRecyclerAdapterBinder` that is the basic interface for `SmartRecyclerAdapter` binding extensions.
-
-```kotlin
-// If adapter items contains unspecified super type DiffPredicate bust be of type Any, DiffPredicate<Any>
-private val predicate = object : DiffUtilExtension.DiffPredicate<Int> {
-  override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean {
-    return oldItem == newItem
-  }
-    
-  override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean {
-    return oldItem == newItem
-  }
-}
-
-// Add SimpleDiffUtilExtension to the adapter
-SmartRecyclerAdapter
-  .items((0..100).toMutableList())
-  .map(Integer::class, SimpleItemViewHolder::class)
-  .add(SimpleDiffUtilExtension(predicate))
-  .into(recyclerView)
-
-// Add some new random items
-smartRecyclerAdapter.diffSwapList((0..100).shuffled().toMutableList())
-```
-
-**See sample app section:** [#DiffUtil](#diffutil)
-
 # smart-recycler-adapter-nestedadapter
 
 As of `smart-recycler-adapter:v5.0.0` static nested adapter mapping have been removed from `SmartRecyclerAdapter` and is added in this extension library `smart-recycler-adapter-nestedadapter`.<br/>
@@ -478,7 +443,7 @@ This rule is auto included in the `consumer-rules.pro` for `smart-recycler-adapt
 
 # More
 
-For more samples test out the sample app and see the [source code](https://github.com/manneohlund/smart-recycler-adapter/tree/master/sample/src/main/kotlin/com/example/smartrecycleradapter).
+For more samples test out the sample app and see the [source code](https://github.com/David-zero8/smart-recycler-adapter/tree/master/sample/src).
 
 ### RecyclableViewHolder
 
