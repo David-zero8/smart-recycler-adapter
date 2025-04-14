@@ -63,7 +63,7 @@ repositories {
 ```groovy
 dependencies {
   // Core SmartRecyclerAdapter
-  implementation 'com.github.David-zero8:smart-recycler-adapter:1.0.11'
+  implementation 'com.github.David-zero8:smart-recycler-adapter:1.0.12'
 }
 ```
 
