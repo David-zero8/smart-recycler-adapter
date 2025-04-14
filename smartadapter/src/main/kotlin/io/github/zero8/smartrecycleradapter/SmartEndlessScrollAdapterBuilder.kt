@@ -3,6 +3,7 @@ package io.github.zero8.smartrecycleradapter
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.listener.OnLoadMoreListener
+import java.util.concurrent.Executor
 
 class SmartEndlessScrollAdapterBuilder : SmartAdapterBuilder() {
 
@@ -13,7 +14,11 @@ class SmartEndlessScrollAdapterBuilder : SmartAdapterBuilder() {
     private var onLoadMoreListener: OnLoadMoreListener? = null
 
     override fun getSmartRecyclerAdapter(): SmartRecyclerAdapter {
-        return SmartEndlessScrollRecyclerAdapter(items = items).also {
+        return SmartEndlessScrollRecyclerAdapter(
+            diffCallback = diffCallback,
+            items = items,
+            backgroundExecutor = backgroundExecutor
+        ).also {
             it.isEndlessScrollEnabled = isEndlessScrollEnabled
             it.autoLoadMoreEnabled = autoLoadMoreEnabled
             it.loadMoreLayoutResource = loadMoreLayoutResource
@@ -55,6 +60,11 @@ class SmartEndlessScrollAdapterBuilder : SmartAdapterBuilder() {
 
     override fun setDiffCallback(diffCallback: DiffUtil.ItemCallback<Any>): SmartEndlessScrollAdapterBuilder {
         this.diffCallback = diffCallback
+        return this
+    }
+
+    override fun setBackgroundExecutor(executor: Executor): SmartEndlessScrollAdapterBuilder {
+        this.backgroundExecutor = executor
         return this
     }
 }

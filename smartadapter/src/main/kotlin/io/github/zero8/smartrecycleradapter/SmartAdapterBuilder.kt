@@ -11,6 +11,8 @@ import io.github.zero8.smartrecycleradapter.viewholder.SmartAdapterHolder
 import io.github.zero8.smartrecycleradapter.widget.ViewTypeResolver
 import smartrecycleradapter.extension.ItemTouchBinder
 import smartrecycleradapter.extension.SmartExtensionIdentifier
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import kotlin.reflect.KClass
 
 /**
@@ -23,11 +25,11 @@ open class SmartAdapterBuilder {
     internal val viewHolderMapper = HashMap<String, SmartViewHolderType>()
     internal val smartExtensions = mutableMapOf<Any, SmartExtensionIdentifier>()
     internal var diffCallback: DiffUtil.ItemCallback<Any> = SmartRecyclerAdapter.Companion.DEFAULT_DIFF_CALLBACK
-
+    internal var backgroundExecutor: Executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1)
 
     internal open fun getSmartRecyclerAdapter() = SmartRecyclerAdapter(diffCallback, items.let {
         (if (it.isMutable()) it else it.toMutableList())
-    })
+    }, backgroundExecutor)
 
     fun map(itemType: KClass<*>, viewHolderType: SmartViewHolderType): SmartAdapterBuilder {
         viewHolderMapper[itemType.name] = viewHolderType
@@ -61,6 +63,11 @@ open class SmartAdapterBuilder {
 
     open fun setDiffCallback(diffCallback: DiffUtil.ItemCallback<Any>): SmartAdapterBuilder {
         this.diffCallback = diffCallback
+        return this
+    }
+
+    open fun setBackgroundExecutor(executor: Executor): SmartAdapterBuilder {
+        this.backgroundExecutor = executor
         return this
     }
 
