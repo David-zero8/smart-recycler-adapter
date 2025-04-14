@@ -6,12 +6,20 @@ import androidx.recyclerview.widget.DiffUtil
 import io.github.zero8.smartrecycleradapter.listener.OnLoadMoreListener
 import io.github.zero8.smartrecycleradapter.viewholder.LoadMoreViewHolder
 import io.github.zero8.smartrecycleradapter.viewholder.SmartViewHolder
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 /**
  * Enables endless scrolling or pagination. Let's the adapter show a [smartrecycleradapter.viewholder.LoadMoreViewHolder] when scrolled to last item.
  */
 @Suppress("UNCHECKED_CAST")
-class SmartEndlessScrollRecyclerAdapter(diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK, items: MutableList<Any>) : SmartRecyclerAdapter(diffCallback, items), ISmartEndlessScrollRecyclerAdapter {
+class SmartEndlessScrollRecyclerAdapter(
+    diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK,
+    items: MutableList<Any>,
+    backgroundExecutor: Executor = Executors.newFixedThreadPool(
+        Runtime.getRuntime().availableProcessors() + 1
+    )
+) : SmartRecyclerAdapter(diffCallback, items, backgroundExecutor), ISmartEndlessScrollRecyclerAdapter {
 
     private val VIEW_TYPE_LOADING = Integer.MAX_VALUE
 

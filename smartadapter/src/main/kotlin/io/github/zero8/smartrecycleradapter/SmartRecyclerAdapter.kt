@@ -5,8 +5,10 @@ package io.github.zero8.smartrecycleradapter
  * Copyright © 2019 All rights reserved.
  */
 
+import android.os.AsyncTask
 import android.util.Log
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.RecyclerView
 import java.util.HashMap
 import androidx.recyclerview.widget.DiffUtil
@@ -25,6 +27,8 @@ import io.github.zero8.smartrecycleradapter.widget.ViewTypeResolver
 import smartrecycleradapter.extension.SmartExtensionIdentifier
 import smartrecycleradapter.extension.SmartRecyclerAdapterBinder
 import smartrecycleradapter.extension.SmartViewHolderBinder
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import kotlin.reflect.KClass
 
 /**
@@ -57,8 +61,17 @@ typealias Position = Int
  * It handles all the implementations of the [ISmartRecyclerAdapter] functionality.
  */
 @Suppress("UNCHECKED_CAST")
-open class SmartRecyclerAdapter(diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK,items: MutableList<Any>)
-    : ListAdapter<Any, SmartViewHolder<Any>>(diffCallback), ISmartRecyclerAdapter {
+open class SmartRecyclerAdapter(
+    diffCallback: DiffUtil.ItemCallback<Any> = DEFAULT_DIFF_CALLBACK,
+    items: MutableList<Any>,
+    backgroundExecutor: Executor = Executors.newFixedThreadPool(
+        Runtime.getRuntime().availableProcessors() + 1
+    )
+) : ListAdapter<Any, SmartViewHolder<Any>>(
+    AsyncDifferConfig.Builder(diffCallback)
+        .setBackgroundThreadExecutor(backgroundExecutor)
+        .build()
+), ISmartRecyclerAdapter {
 
     companion object {
         val DEFAULT_DIFF_CALLBACK = object : DiffUtil.ItemCallback<Any>() {
